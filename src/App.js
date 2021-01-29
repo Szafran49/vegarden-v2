@@ -1,13 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
 import Layout from "./components/Layout";
 import NavBar from "./components/NavBar";
-import Home from "./components/Home";
+import Creator from "./components/Creator";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 function App() {
   return (
     <Layout>
       <NavBar />
-      <Home />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/creator">
+            <Creator />
+          </Route>
+        </Switch>
+      </Router>
     </Layout>
   );
 }
