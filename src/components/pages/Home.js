@@ -2,37 +2,41 @@ import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import Link from "react-router-dom/Link";
+
 const StyledButton = styled(Button)`
-  background: blue;
+  background-color: blue;
   position: -webkit-sticky;
   position: sticky;
-  top: 100px;
-  right: 0;
-  border-radius: 0px;
+  color: white;
+  top: 0;
+  right: 45vw;
+  left: 45vw;
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 24px;
+  text-decoration: none;
+  &:hover {
+    background-color: green;
+  }
 `;
 
-const StyledContainer = styled(Grid)`
-  background: red;
+const StyledGrid = styled(Grid)`
   height: 900px;
-  item-align: center;
 `;
 
 const Home = () => {
   return (
-    <StyledContainer
-      container
+    <StyledGrid
       spacing={0}
       direction="column"
       alignItems="center"
       justify="top"
-      style={{ minHeight: "100vh" }}
     >
-      <Link to="/creator">
-        <StyledButton size="large" variant="contained" color="primary">
-          Zaczynajmy!
-        </StyledButton>
+      <Link to="/flower-beds" style={{ textDecoration: "none" }}>
+        <StyledButton variant="contained">Start</StyledButton>
       </Link>
-    </StyledContainer>
+    </StyledGrid>
   );
 };
 

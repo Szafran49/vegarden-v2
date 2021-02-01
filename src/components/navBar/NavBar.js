@@ -4,14 +4,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import ProjectLogo from "./NavBarLogo";
 import SignUpButton from "./SignUpButton";
-import LogInButton from "./LogInButton";
+import SignInButton from "./SignInButton";
+import Link from "../../shared/StyledLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
@@ -19,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     flexGrow: 1,
     fontSize: 32,
+  },
+  logoWidth: {
+    flexGrow: 10,
   },
 }));
 
@@ -28,11 +29,17 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <div className={classes.logo}>
-            <ProjectLogo className={classes.logo} />
+          <div className={classes.logoWidth}>
+            <Link to="/" exact>
+              <div className={classes.logo}>
+                <ProjectLogo />
+              </div>
+            </Link>
           </div>
-          <LogInButton />
-          <SignUpButton />
+          <div className={classes.buttons}>
+            <SignInButton />
+            <SignUpButton />
+          </div>
         </Toolbar>
       </AppBar>
     </div>
