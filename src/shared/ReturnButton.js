@@ -4,7 +4,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 export default function ReturnButton({ to }) {
     return (
-        <Link to={to} exact>
+        <Link to={to}>
             <IconButton size="small">
                 <ArrowBackIcon /> Wróć
         </IconButton>

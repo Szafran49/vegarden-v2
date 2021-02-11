@@ -10,10 +10,10 @@ import FormControl from '@material-ui/core/FormControl'
 import { useNavigate } from "react-router-dom";
 
 export default function FlowerBedForm() {
-
+  const navigation = useNavigate();
 
   function handleSubmit() {
-
+    navigation('../select-vegetables')
   }
   return (
     <>

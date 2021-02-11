@@ -30,7 +30,7 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <div className={classes.logoWidth}>
-            <Link to="/" exact>
+            <Link to="/">
               <div className={classes.logo}>
                 <ProjectLogo />
               </div>

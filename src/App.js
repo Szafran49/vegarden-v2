@@ -6,6 +6,7 @@ import FlowerBeds from "./pages/FlowerBeds";
 import FlowerBedForm from "./pages/FlowerBedForm";
 import Vegetables from "./pages/SelectVegetables";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./data/Auth";
 
 export default function App() {
   return (

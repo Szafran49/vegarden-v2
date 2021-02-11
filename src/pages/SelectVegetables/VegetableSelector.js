@@ -6,7 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
-import { db } from "../../data/firebase";
+import { firestore } from "../../data/firebase";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,9 +33,10 @@ export default function VegetableSelector() {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [selectedData, toggleSelectedData] = useState([]);
+
   useEffect(function loadData() {
     const fetchData = async () => {
-      const vegetables = await db.collection("Vegetables").get();
+      const vegetables = await firestore.collection("Vegetables").get();
       const tmp = [];
       vegetables.docs.map(async (doc) => {
         tmp.push({ id: doc.id, ...doc.data() });
@@ -46,11 +47,14 @@ export default function VegetableSelector() {
   }, []);
 
   function handleClick(item) {
-    toggleSelectedData((selectedData) => [...selectedData, item]);
+    const found = selectedData.some(el => el.id === item.id);
+    if (!found) {
+      toggleSelectedData((selectedData) => [...selectedData, item]);
+    }
+
   }
 
   function deleteSelectedItem(id) {
-    console.log(id);
     toggleSelectedData((selectedData) =>
       selectedData.filter((item) => item.id !== id)
     );
