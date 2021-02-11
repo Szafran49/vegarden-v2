@@ -7,7 +7,7 @@ import SignUpButton from "./SignUpButton";
 import SignInButton from "./SignInButton";
 import Link from "../../shared/StyledLink";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },

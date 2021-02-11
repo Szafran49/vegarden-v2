@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
@@ -11,7 +10,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
+import app from '../../data/firebase'
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
@@ -56,7 +55,7 @@ function SignInButton() {
           <Typography component="h1" variant="h5">
             Logowanie
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -85,6 +84,7 @@ function SignInButton() {
             />
             <Button
               type="submit"
+              onClick={() => app.auth().signOut()}
               fullWidth
               variant="contained"
               color="primary"

@@ -1,14 +1,17 @@
 import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
+
 export default function DimensionForm() {
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
+
   function handleWidthChange(e) {
     setWidth(e);
   }
   function handleLengthChange(e) {
     setLength(e);
   }
+
   const squareMeters = (width * length) / 10000;
   return (
     <>

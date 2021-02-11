@@ -9,7 +9,7 @@ export default function InsolationForm() {
   const [value, setValue] = useState();
 
   return (
-    <FormControl component="fieldset">
+    <>
       <FormLabel component="legend">Nasłonecznienie</FormLabel>
       <RadioGroup
         aria-label="insolation"
@@ -21,6 +21,6 @@ export default function InsolationForm() {
         <FormControlLabel value="male" control={<Radio />} label="Średnie" />
         <FormControlLabel value="other" control={<Radio />} label="Małe" />
       </RadioGroup>
-    </FormControl>
+    </>
   );
 }

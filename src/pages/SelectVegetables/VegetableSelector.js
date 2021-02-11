@@ -6,13 +6,13 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
-import { db } from "../data/firebase";
+import { db } from "../../data/firebase";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  container: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "center",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
   },
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     color: "rgba(255, 255, 255, 0.54)",
   },
   header: {
-    fontSize: "40px",
+    fontSize: "30px",
+    textAlign: "center",
   },
 }));
 
@@ -32,7 +33,6 @@ export default function VegetableSelector() {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [selectedData, toggleSelectedData] = useState([]);
-
   useEffect(function loadData() {
     const fetchData = async () => {
       const vegetables = await db.collection("Vegetables").get();
@@ -58,10 +58,10 @@ export default function VegetableSelector() {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>
+      <h1 className={classes.header}>
         Krok 3. Jakie warzywa chcesz zasadzić?
       </h1>
-      <div className={classes.root}>
+      <div className={classes.container}>
         <GridList className={classes.gridList} cellHeight={400}>
           {data.map((item) => (
             <GridListTile key={item.image} cols={0.4} rows={0.5}>
@@ -81,7 +81,6 @@ export default function VegetableSelector() {
             </GridListTile>
           ))}
         </GridList>
-
         {selectedData && (
           <SelectedVegetables
             selectedItems={selectedData}
@@ -92,8 +91,3 @@ export default function VegetableSelector() {
     </>
   );
 }
-// <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
-//   <ListSubheader component="div" className={classes.header}>
-//     Warzywa
-//   </ListSubheader>
-// </GridListTile>;

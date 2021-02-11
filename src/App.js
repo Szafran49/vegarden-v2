@@ -1,31 +1,27 @@
 import React from "react";
-import Home from "./components/pages/Home";
+import Home from "./pages/Home";
 import Layout from "./layout/Layout";
 import NavBar from "./components/navBar/NavBar";
-import FlowerBeds from "./components/pages/FlowerBeds";
-import FlowerBedForm from "./components/FlowerBedForm";
-import Vegetables from "./components/pages/Vegetables";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import FlowerBeds from "./pages/FlowerBeds";
+import FlowerBedForm from "./pages/FlowerBedForm";
+import Vegetables from "./pages/SelectVegetables";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
   return (
     <Router>
       <Layout>
         <NavBar />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/flower-beds">
+            <Route path="/overview" element={<FlowerBeds />} />
+            <Route path="/create">
+              <Route path="/form" element={<FlowerBedForm />} />
+              <Route path="/select-vegetables" element={<Vegetables />} />
+            </Route>
           </Route>
-          <Route path="/flower-beds" exact>
-            <FlowerBeds />
-          </Route>
-          <Route path="/flower-beds/create" exact>
-            <FlowerBedForm />
-          </Route>
-          <Route path="/flower-beds/choose-vegetables" exact>
-            <Vegetables />
-          </Route>
-        </Switch>
+        </Routes>
       </Layout>
     </Router>
   );

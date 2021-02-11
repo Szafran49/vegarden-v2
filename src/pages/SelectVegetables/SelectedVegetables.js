@@ -29,7 +29,6 @@ export default function SelectedVegetables({
 }) {
   const classes = useStyles();
   function handleClick(id) {
-    console.log(id);
     deleteSelectedItem(id);
   }
 

@@ -1,3 +1,4 @@
-const dataPages = {};
+const dataPages = {
+};
 
 export default dataPages;
