@@ -6,11 +6,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import Link from "../../shared/StyledLink";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import StyledCloseButton from '../../shared/StyledModalCloseButton'
+import CloseIcon from '@material-ui/icons/CloseSharp'
 import app from '../../data/firebase'
+import FormControl from '@material-ui/core/FormControl'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,10 +24,6 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -56,12 +55,13 @@ function SignInButton() {
           <Typography component="h1" variant="h5">
             Logowanie
           </Typography>
-          <form className={classes.form}>
+          <StyledCloseButton onClick={handleClose}>
+            <CloseIcon />
+          </StyledCloseButton>
+          <FormControl fullWidth required>
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
               id="email"
               label="Adres email"
               name="email"
@@ -71,8 +71,6 @@ function SignInButton() {
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
               name="password"
               label="Hasło"
               type="password"
@@ -85,8 +83,6 @@ function SignInButton() {
             />
             <Button
               type="submit"
-              onClick={() => app.auth().signOut()}
-              fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
@@ -95,17 +91,17 @@ function SignInButton() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   Zapomniałeś hasła?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   {"Nie masz konta? Założysz je tutaj!"}
                 </Link>
               </Grid>
             </Grid>
-          </form>
+          </FormControl>
         </div>
       </Container>
     </Modal>

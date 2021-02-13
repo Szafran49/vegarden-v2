@@ -6,6 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
+import Typography from '@material-ui/core/Typography'
 import { firestore } from "../../data/firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
-  },
-  header: {
-    fontSize: "30px",
-    textAlign: "center",
   },
 }));
 
@@ -51,7 +48,6 @@ export default function VegetableSelector() {
     if (!found) {
       toggleSelectedData((selectedData) => [...selectedData, item]);
     }
-
   }
 
   function deleteSelectedItem(id) {
@@ -62,9 +58,9 @@ export default function VegetableSelector() {
 
   return (
     <>
-      <h1 className={classes.header}>
-        Krok 3. Jakie warzywa chcesz zasadzić?
-      </h1>
+      <Typography variant="h4" align="center">
+        Wybierz warzywa do zasadzenia
+        </Typography>
       <div className={classes.container}>
         <GridList className={classes.gridList} cellHeight={400}>
           {data.map((item) => (

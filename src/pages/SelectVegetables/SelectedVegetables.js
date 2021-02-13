@@ -7,6 +7,9 @@ import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    border: "1px solid red",
+    width: "300px",
+    maxHeight: "600px",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "flex-start",
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     height: "300px",
     width: "300px",
     border: "1px solid red",
-  }
+  },
 }));
 
 export default function SelectedVegetables({
@@ -38,34 +41,29 @@ export default function SelectedVegetables({
   }
 
   return (
-    <>
-
-      <div className={classes.container} />
-      <div className={classes.root}>
-        {selectedItems.map((item) => (
-          <GridList
-            style={{ backgroundColor: "white" }}
-            cellHeight={200}
-            className={classes.gridList}
-          >
-            <GridListTile cols={2} rows={1}>
-              <img src={item.image} alt="testujemy..." />
-              <GridListTileBar
-                title={item.name}
-                actionIcon={
-                  <IconButton
-                    aria-label={`info about ${item.id}`}
-                    className={classes.icon}
-                    onClick={() => handleClick(item.id)}
-                  >
-                    <RemoveIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
-          </GridList>
-        ))}
-      </div>
-    </>
+    <div className={classes.root}>
+      {selectedItems.map((item) => (
+        <GridList
+          style={{ backgroundColor: "white" }}
+          cellHeight={200}
+          className={classes.gridList}
+        >
+          <GridListTile cols={0} rows={0}>
+            <GridListTileBar
+              title={item.name}
+              actionIcon={
+                <IconButton
+                  aria-label={`info about ${item.id}`}
+                  className={classes.icon}
+                  onClick={() => handleClick(item.id)}
+                >
+                  <RemoveIcon />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+        </GridList>
+      ))}
+    </div>
   );
 }
