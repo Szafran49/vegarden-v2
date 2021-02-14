@@ -4,10 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import Link from '../../shared/StyledLink';
 
 const StyledButton = styled(Button)`
-  background-color: blue;
   position: -webkit-sticky;
   position: sticky;
-  color: white;
   top: 0;
   right: 45vw;
   left: 45vw;

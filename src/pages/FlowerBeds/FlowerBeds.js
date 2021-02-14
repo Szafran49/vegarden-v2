@@ -6,7 +6,6 @@ import ReturnButton from '../../shared/ReturnButton'
 const FlowerBeds = () => {
   return (
     <>
-      <ReturnButton to='/' />
       <Grid
         container
         direction="row-reverse"
@@ -15,6 +14,8 @@ const FlowerBeds = () => {
         style={{ marginBottom: "20px" }}
       >
         <CreateFlowerBed />
+
+        <ReturnButton to='/' />
       </Grid>
       <Grid>
         <ExistingFlowerBeds />
