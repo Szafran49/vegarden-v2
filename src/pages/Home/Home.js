@@ -1,13 +1,11 @@
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
-import Link from "react-router-dom/Link";
+import Link from '../../shared/StyledLink';
 
 const StyledButton = styled(Button)`
-  background-color: blue;
   position: -webkit-sticky;
   position: sticky;
-  color: white;
   top: 0;
   right: 45vw;
   left: 45vw;
@@ -33,7 +31,7 @@ const Home = () => {
       alignItems="center"
       justify="top"
     >
-      <Link to="/flower-beds" style={{ textDecoration: "none" }}>
+      <Link to="/flower-beds/overview">
         <StyledButton variant="contained">Start</StyledButton>
       </Link>
     </StyledGrid>

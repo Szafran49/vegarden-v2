@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Modal from "@material-ui/core/Modal";
+import FormControl from '@material-ui/core/FormControl'
+import StyledCloseButton from '../../shared/StyledModalCloseButton'
+import CloseIcon from '@material-ui/icons/CloseSharp'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,16 +22,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
-function SignUpButton() {
+export default function SignUpButton({ history }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -39,6 +38,11 @@ function SignUpButton() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleSignUp = useCallback(async event => {
+    event.preventDefault()
+
+  })
   const body = (
     <Modal
       open={open}
@@ -52,46 +56,41 @@ function SignUpButton() {
           <Typography component="h1" variant="h5">
             Rejestracja
           </Typography>
-          <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Nazwa użytkownika"
-                  name="username"
-                  autoComplete="username"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Adres email"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Hasło"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-              </Grid>
-            </Grid>
+          <StyledCloseButton onClick={handleClose}>
+            <CloseIcon />
+          </StyledCloseButton>
+          <FormControl fullWidth required>
+            <TextField
+              autoFocus
+              required
+              variant="outlined"
+              id="username"
+              label="Nazwa użytkownika"
+              name="username"
+              autoComplete="username"
+              margin="normal"
+            />
+            <TextField
+              required
+              variant="outlined"
+              id="email"
+              label="Adres email"
+              name="email"
+              margin="normal"
+              autoComplete="email"
+            />
+            <TextField
+              required
+              variant="outlined"
+              name="password"
+              label="Hasło"
+              type="password"
+              id="password"
+              margin="normal"
+              autoComplete="current-password"
+            />
             <Button
               type="submit"
-              fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
@@ -100,12 +99,12 @@ function SignUpButton() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   Masz już konto? Zaloguj się!
                 </Link>
               </Grid>
             </Grid>
-          </form>
+          </FormControl>
         </div>
       </Container>
     </Modal>
@@ -119,5 +118,3 @@ function SignUpButton() {
     </>
   );
 }
-
-export default SignUpButton;

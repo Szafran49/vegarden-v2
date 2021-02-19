@@ -10,25 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-<<<<<<< Updated upstream:src/components/SelectedVegetables.js
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-    flexDirection: "column",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    width: 220,
-    height: 220,
-  },
-  icon: {
-    color: "rgba(255, 255, 255, 0.54)",
-  },
-}));
-=======
 const StyledTitle = styled(Typography)`
 `
 
@@ -37,7 +18,6 @@ const StyledList = styled(List)`
   border: 1px solid red;
   overflow-y:auto;
 `
->>>>>>> Stashed changes:src/pages/SelectVegetables/SelectedVegetables.js
 
 export default function SelectedVegetables({
   selectedItems,
@@ -50,25 +30,6 @@ export default function SelectedVegetables({
   }
 
   return (
-<<<<<<< Updated upstream:src/components/SelectedVegetables.js
-    <div className={classes.root}>
-      {selectedItems.map((item) => (
-        <GridList
-          style={{ backgroundColor: "white" }}
-          cellHeight={200}
-          className={classes.gridList}
-        >
-          <GridListTile cols={2} rows={1}>
-            <img src={item.image} alt="testujemy..." />
-            <GridListTileBar
-              title={item.name}
-              actionIcon={
-                <IconButton
-                  aria-label={`info about ${item.id}`}
-                  className={classes.icon}
-                  onClick={() => handleClick(item.id)}
-                >
-=======
     <Grid item xs={2} md={2}>
       <StyledTitle variant="h7" align="center">Wybrane warzywa</StyledTitle>
       <StyledList>
@@ -81,7 +42,6 @@ export default function SelectedVegetables({
               <ListItemText id={item.id} primary={item.name} />
               <ListItemSecondaryAction>
                 <IconButton variant='contained' onClick={() => handleClick(item.id)} >
->>>>>>> Stashed changes:src/pages/SelectVegetables/SelectedVegetables.js
                   <RemoveIcon />
                 </IconButton>
               </ListItemSecondaryAction>

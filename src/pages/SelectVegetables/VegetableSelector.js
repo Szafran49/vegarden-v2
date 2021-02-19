@@ -6,18 +6,6 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
-<<<<<<< Updated upstream:src/components/VegetableSelector.js
-import { db } from "../data/firebase";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-=======
 import RecommendedVegetables from './RecommendedVegetables'
 import Typography from '@material-ui/core/Typography'
 import { firestore } from "../../data/firebase";
@@ -29,16 +17,12 @@ const StyledContainer = styled.div`
     overflow: hidden;
 `
 const useStyles = makeStyles(() => ({
->>>>>>> Stashed changes:src/pages/SelectVegetables/VegetableSelector.js
   gridList: {
     width: 1000,
     height: 600,
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
-  },
-  header: {
-    fontSize: "40px",
   },
 }));
 
@@ -63,27 +47,6 @@ export default function VegetableSelector() {
     }, []);
 
 
-<<<<<<< Updated upstream:src/components/VegetableSelector.js
-  useEffect(function loadData() {
-    const fetchData = async () => {
-      const vegetables = await db.collection("Vegetables").get();
-      const tmp = [];
-      vegetables.docs.map(async (doc) => {
-        tmp.push({ id: doc.id, ...doc.data() });
-      });
-      setData(tmp);
-    };
-    fetchData();
-  }, []);
-
-  function handleClick(item) {
-    toggleSelectedData((selectedData) => [...selectedData, item]);
-  }
-
-  function deleteSelectedItem(id) {
-    console.log(id);
-    toggleSelectedData((selectedData) =>
-=======
   useEffect(
     function updateRecommendation() {
       var matchedItems = [];
@@ -102,7 +65,6 @@ export default function VegetableSelector() {
   }
 
   function handleClick(item) {
-    console.log(item);
     const founded = findItem(item);
     if (!founded) {
       setSelectedItems((selectedItems) => [...selectedItems, item]);
@@ -111,24 +73,16 @@ export default function VegetableSelector() {
 
   function deleteSelectedItem(id) {
     setSelectedItems((selectedData) =>
->>>>>>> Stashed changes:src/pages/SelectVegetables/VegetableSelector.js
       selectedData.filter((item) => item.id !== id)
     );
   }
 
   return (
     <>
-<<<<<<< Updated upstream:src/components/VegetableSelector.js
-      <h1 style={{ textAlign: "center" }}>
-        Krok 3. Jakie warzywa chcesz zasadzić?
-      </h1>
-      <div className={classes.root}>
-=======
       <Typography variant="h4" align="center">
         Wybierz warzywa do zasadzenia
         </Typography>
       <StyledContainer>
->>>>>>> Stashed changes:src/pages/SelectVegetables/VegetableSelector.js
         <GridList className={classes.gridList} cellHeight={400}>
           {items.map((item) => (
             <GridListTile key={item.image} cols={0.4} rows={0.5}>
@@ -147,12 +101,7 @@ export default function VegetableSelector() {
             </GridListTile>
           ))}
         </GridList>
-<<<<<<< Updated upstream:src/components/VegetableSelector.js
-
-        {selectedData && (
-=======
         {selectedItems && (
->>>>>>> Stashed changes:src/pages/SelectVegetables/VegetableSelector.js
           <SelectedVegetables
             selectedItems={selectedItems}
             deleteSelectedItem={deleteSelectedItem}
@@ -163,8 +112,3 @@ export default function VegetableSelector() {
     </>
   );
 }
-// <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
-//   <ListSubheader component="div" className={classes.header}>
-//     Warzywa
-//   </ListSubheader>
-// </GridListTile>;
