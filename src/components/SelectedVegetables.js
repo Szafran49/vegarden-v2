@@ -1,10 +1,16 @@
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import { makeStyles } from "@material-ui/core/styles";
 import RemoveIcon from "@material-ui/icons/Remove";
 import IconButton from "@material-ui/core/IconButton";
+import styled from 'styled-components'
+import Grid from '@material-ui/core/Grid'
+import Typography from "@material-ui/core/Typography";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
+<<<<<<< Updated upstream:src/components/SelectedVegetables.js
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -22,18 +28,29 @@ const useStyles = makeStyles((theme) => ({
     color: "rgba(255, 255, 255, 0.54)",
   },
 }));
+=======
+const StyledTitle = styled(Typography)`
+`
+
+const StyledList = styled(List)`
+  height:550px;
+  border: 1px solid red;
+  overflow-y:auto;
+`
+>>>>>>> Stashed changes:src/pages/SelectVegetables/SelectedVegetables.js
 
 export default function SelectedVegetables({
   selectedItems,
   deleteSelectedItem,
 }) {
-  const classes = useStyles();
+
   function handleClick(id) {
     console.log(id);
     deleteSelectedItem(id);
   }
 
   return (
+<<<<<<< Updated upstream:src/components/SelectedVegetables.js
     <div className={classes.root}>
       {selectedItems.map((item) => (
         <GridList
@@ -51,13 +68,26 @@ export default function SelectedVegetables({
                   className={classes.icon}
                   onClick={() => handleClick(item.id)}
                 >
+=======
+    <Grid item xs={2} md={2}>
+      <StyledTitle variant="h7" align="center">Wybrane warzywa</StyledTitle>
+      <StyledList>
+        {selectedItems.map((item) => {
+          return (
+            <ListItem key={item.id}>
+              <ListItemAvatar>
+                <Avatar alt={item.id} src={item.image} />
+              </ListItemAvatar>
+              <ListItemText id={item.id} primary={item.name} />
+              <ListItemSecondaryAction>
+                <IconButton variant='contained' onClick={() => handleClick(item.id)} >
+>>>>>>> Stashed changes:src/pages/SelectVegetables/SelectedVegetables.js
                   <RemoveIcon />
                 </IconButton>
-              }
-            />
-          </GridListTile>
-        </GridList>
-      ))}
-    </div>
+              </ListItemSecondaryAction>
+            </ListItem>)
+        })}
+      </StyledList>
+    </Grid>
   );
 }
