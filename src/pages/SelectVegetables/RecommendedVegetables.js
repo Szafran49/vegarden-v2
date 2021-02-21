@@ -16,11 +16,9 @@ const StyledList = styled(List)`
 `
 
 export default function RecommendedVegetables({ recommendedItems, addItem }) {
-
     function handleClick(item) {
         addItem(item)
     }
-
 
     return (
         <>

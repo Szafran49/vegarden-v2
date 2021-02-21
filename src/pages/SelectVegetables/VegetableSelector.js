@@ -50,14 +50,16 @@ export default function VegetableSelector() {
   useEffect(
     function updateRecommendation() {
       var matchedItems = [];
-      selectedItems.map(item => item.likesArray.map(it => {
+      var allItems = []
+      selectedItems.forEach(item => item.likesArray.forEach(it => {
         for (let i = 0; i < items.length; i++) {
           if (it === items[i].id) {
-            matchedItems.push(items[i]);
+            allItems.push(items[i]);
           }
         }
       }))
       setRecommendedItems([...matchedItems])
+
     }, [selectedItems]);
 
   function findItem(item) {

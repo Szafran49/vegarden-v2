@@ -51,8 +51,8 @@ export default function FlowerBedForm() {
     }
   }
 
-  function handleSubmit() {
-    console.log(width)
+  function handleSubmit(e) {
+    e.preventDefault();
     if (width && length) {
       navigation('../select-vegetables')
     }
@@ -119,7 +119,7 @@ export default function FlowerBedForm() {
           type="submit"
           variant="contained"
           color="primary"
-          onClick={() => handleSubmit()}
+          onClick={(e) => handleSubmit(e)}
         >
           Kontynuuj
               </Button>

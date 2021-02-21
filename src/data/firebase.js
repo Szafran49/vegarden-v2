@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
+import 'firebase/auth'
 
 const firebaseApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,6 +13,7 @@ const firebaseApp = firebase.initializeApp({
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
 
+export const auth = firebaseApp.auth();
 export const firestore = firebaseApp.firestore();
 export const storage = firebase.storage();
 export const imagesDir = "VegetablesImages/";
