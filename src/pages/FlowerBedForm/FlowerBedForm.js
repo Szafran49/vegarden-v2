@@ -19,7 +19,7 @@ const StyledRadioGroup = styled(RadioGroup)`
 
 export default function FlowerBedForm() {
   const navigation = useNavigate();
-  const [value, setValue] = useState('large');
+  const [radioValue, setRadioValue] = useState('large');
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
   const [widthError, setWidthError] = useState(null);
@@ -107,8 +107,8 @@ export default function FlowerBedForm() {
           <StyledRadioGroup
             aria-label="insolation"
             name="insolation"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={radioValue}
+            onChange={(e) => setRadioValue(e.target.value)}
           >
             <FormControlLabel value="large" control={<Radio />} label="Duże" />
             <FormControlLabel value="medium" control={<Radio />} label="Średnie" />

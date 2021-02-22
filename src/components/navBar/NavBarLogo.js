@@ -6,8 +6,6 @@ const StyledImage = styled.img`
   height:100px;
 `
 
-
-
 const NavBarLogo = () => {
   return <StyledImage src={logo} alt="logo" />;
 };

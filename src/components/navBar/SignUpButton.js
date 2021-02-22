@@ -1,9 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "../../shared/StyledLink";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -11,6 +9,7 @@ import Modal from "@material-ui/core/Modal";
 import FormControl from '@material-ui/core/FormControl'
 import StyledCloseButton from '../../shared/StyledModalCloseButton'
 import CloseIcon from '@material-ui/icons/CloseSharp'
+import { useAuth } from '../../contexts/AuthContexts'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,9 +26,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUpButton({ history }) {
+//rejestracja...
+export default function SignUpButton() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [passwordConfirm, setPasswordConfirm] = useState()
+  const { signUp, currentUser } = useAuth();
+  const [error, setError] = useState("")
 
   const handleOpen = () => {
     setOpen(true);
@@ -39,10 +44,32 @@ export default function SignUpButton({ history }) {
     setOpen(false);
   };
 
-  const handleSignUp = useCallback(async event => {
-    event.preventDefault()
+  function handleEmailChange(value) {
+    setEmail(value)
+  }
 
-  })
+  function handlePasswordChange(value) {
+    setPassword(value)
+  }
+
+  function handlePasswordConfirmChange(value) {
+    setPasswordConfirm(value)
+  }
+
+  function handleSignUp() {
+    if (password !== passwordConfirm) {
+      setError("Hasła nie są jednakowe!")
+    }
+    console.log(currentUser)
+    try {
+      setError("")
+      signUp(email, password)
+    }
+    catch {
+      setError("Nie udało się stworzyć konta")
+    }
+  }
+
   const body = (
     <Modal
       open={open}
@@ -60,16 +87,7 @@ export default function SignUpButton({ history }) {
             <CloseIcon />
           </StyledCloseButton>
           <FormControl fullWidth required>
-            <TextField
-              autoFocus
-              required
-              variant="outlined"
-              id="username"
-              label="Nazwa użytkownika"
-              name="username"
-              autoComplete="username"
-              margin="normal"
-            />
+            {currentUser && currentUser.email}
             <TextField
               required
               variant="outlined"
@@ -78,6 +96,8 @@ export default function SignUpButton({ history }) {
               name="email"
               margin="normal"
               autoComplete="email"
+              value={email}
+              onChange={(e) => handleEmailChange(e.target.value)}
             />
             <TextField
               required
@@ -88,31 +108,40 @@ export default function SignUpButton({ history }) {
               id="password"
               margin="normal"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => handlePasswordChange(e.target.value)}
+            />
+            <TextField
+              required
+              variant="outlined"
+              name="password-confirm"
+              label="Powtórz hasło"
+              type="password"
+              id="password-confirm"
+              margin="normal"
+              autoComplete="current-password"
+              value={passwordConfirm}
+              onChange={(e) => handlePasswordConfirmChange(e.target.value)}
             />
             <Button
               type="submit"
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={(e) => handleSignUp(e)}
             >
               Załóż konto
             </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link to="/" variant="body2">
-                  Masz już konto? Zaloguj się!
-                </Link>
-              </Grid>
-            </Grid>
           </FormControl>
         </div>
       </Container>
     </Modal>
   );
+
   return (
     <>
       <Button onClick={handleOpen} variant="outlined">
-        Zarejestruj
+        Załóż konto
       </Button>
       {body}
     </>

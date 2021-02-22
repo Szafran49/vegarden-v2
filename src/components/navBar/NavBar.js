@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Logo from "./NavBarLogo";
-import SignUpButton from "./SignUpButton";
-import SignInButton from "./SignInButton";
+import SignupButton from "./SignupButton";
+import SigninButton from "./SigninButton";
+import SignoutButton from "./SignoutButton";
+import UserProfileButton from "./UserProfileButton";
 import Link from "../../shared/StyledLink";
-
+import { useAuth } from '../../contexts/AuthContexts'
 const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
@@ -19,11 +21,12 @@ const useStyles = makeStyles(() => ({
     flexGrow: 10,
   },
   appBar: {
-    backgroundColor: "rgb(11, 184, 66)",
+    background: "linear-gradient(to left, #017a28, #0bb842)",
   }
 }));
 
 export default function NavBar() {
+  const { currentUser } = useAuth()
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.appBar}>
@@ -34,8 +37,14 @@ export default function NavBar() {
           </Link>
         </div>
         <div className={classes.buttons}>
-          <SignInButton />
-          <SignUpButton />
+          {!currentUser &&
+            <>
+              <SigninButton />
+              <SignupButton />
+            </>
+          }
+          <UserProfileButton />
+          <SignoutButton />
         </div>
       </Toolbar>
     </AppBar>

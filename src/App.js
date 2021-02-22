@@ -2,12 +2,14 @@ import React from "react";
 import Home from "./pages/Home";
 import Layout from "./layout/Layout";
 import NavBar from "./components/navBar/NavBar";
+import UserProfile from './pages/UserProfile'
 import FlowerBeds from "./pages/FlowerBeds";
 import FlowerBedForm from "./pages/FlowerBedForm";
 import Vegetables from "./pages/SelectVegetables";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContexts";
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import PrivateRoute from './routes/PrivateRoute'
 import theme from './theme/theme'
 
 export default function App() {
@@ -16,9 +18,9 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Layout>
-            <NavBar />
             <Routes>
               <Route path="/" element={<Home />} />
+              <PrivateRoute path="/profile/:slug" element={<UserProfile />} />
               <Route path="/flower-beds">
                 <Route path="/overview" element={<FlowerBeds />} />
                 <Route path="/create">

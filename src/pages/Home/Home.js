@@ -1,7 +1,10 @@
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
-import Link from '../../shared/StyledLink';
+import { useAuth } from '../../contexts/AuthContexts'
+import { useNavigate } from "react-router";
+import { useState } from 'react'
+import LoginReminder from "./LoginReminder";
 
 const StyledButton = styled(Button)`
   position: -webkit-sticky;
@@ -20,21 +23,36 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledGrid = styled(Grid)`
-  height: 900px;
 `;
 
 const Home = () => {
+  const { currentUser } = useAuth();
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  var modalBody = <LoginReminder isOpen={open} setOpen={setOpen} />;
+
+  const handleClick = () => {
+    if (!currentUser) {
+      setOpen(true)
+    }
+    else {
+      navigate('/flower-beds/overview')
+    }
+  }
+
+
   return (
-    <StyledGrid
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="top"
-    >
-      <Link to="/flower-beds/overview">
-        <StyledButton variant="contained">Start</StyledButton>
-      </Link>
-    </StyledGrid>
+    <>
+      <StyledGrid
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="top"
+      >
+        <StyledButton variant="contained" onClick={handleClick}>Start</StyledButton>
+        {modalBody}
+      </StyledGrid>
+    </>
   );
 };
 
