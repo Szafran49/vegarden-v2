@@ -54,9 +54,10 @@ export default function VegetableSelector() {
       selectedItems.forEach(item => item.likesArray.forEach(it => {
         for (let i = 0; i < items.length; i++) {
           if (it === items[i].id) {
-            allItems.push(items[i]);
+            matchedItems.push(items[i]);
           }
         }
+        ///TODO ITEMS PROPER MAPPING
       }))
       setRecommendedItems([...matchedItems])
 

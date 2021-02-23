@@ -12,8 +12,8 @@ const firebaseApp = firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
-
 export const auth = firebaseApp.auth();
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 export const firestore = firebaseApp.firestore();
 export const storage = firebase.storage();
 export const imagesDir = "VegetablesImages/";

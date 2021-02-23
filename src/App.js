@@ -9,7 +9,6 @@ import Vegetables from "./pages/SelectVegetables";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContexts";
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import PrivateRoute from './routes/PrivateRoute'
 import theme from './theme/theme'
 
 export default function App() {
@@ -20,7 +19,7 @@ export default function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <PrivateRoute path="/profile/:slug" element={<UserProfile />} />
+              <Route path="/profile/:slug" element={<UserProfile />} />
               <Route path="/flower-beds">
                 <Route path="/overview" element={<FlowerBeds />} />
                 <Route path="/create">

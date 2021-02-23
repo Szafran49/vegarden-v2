@@ -3,35 +3,33 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Logo from "./NavBarLogo";
-import SignupButton from "./SignupButton";
-import SigninButton from "./SigninButton";
-import SignoutButton from "./SignoutButton";
-import UserProfileButton from "./UserProfileButton";
+import SignupButton from "./buttons/SignupButton";
+import SigninButton from "./buttons/SigninButton";
+import SignoutButton from "./buttons/SignoutButton";
+import UserProfileButton from "./buttons/UserProfileButton";
 import Link from "../../shared/StyledLink";
 import { useAuth } from '../../contexts/AuthContexts'
-const useStyles = makeStyles(() => ({
-  title: {
-    flexGrow: 1,
-  },
-  logo: {
-    flexGrow: 1,
-    fontSize: 32,
-  },
-  logoWidth: {
-    flexGrow: 10,
-  },
+const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "linear-gradient(to left, #017a28, #0bb842)",
-  }
+    backgroundColor: "white",
+  },
+  logoContainer: {
+    flexGrow: 10,
+    marginLeft: "4vw",
+  },
+  buttons: {
+    marginRight: "calc(4vw + 10px)",
+  },
+
 }));
 
 export default function NavBar() {
   const { currentUser } = useAuth()
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="static" className={classes.appBar} p={2}>
       <Toolbar>
-        <div className={classes.logoWidth}>
+        <div className={classes.logoContainer}>
           <Link to="/">
             <Logo />
           </Link>

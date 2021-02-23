@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         width: 500,
         height: 150,
-        top: 110,
+        top: "-200px",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        margin: "auto",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -27,7 +31,6 @@ const StyledButton = styled(Button)`
     position:absolute;
     left:0;
     right:0;
-    bottom:10px;
     margin:auto;
 `
 
