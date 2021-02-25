@@ -75,7 +75,6 @@ export default function SignInButton() {
       aria-describedby="sign-in-modal"
     >
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Logowanie

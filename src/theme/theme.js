@@ -11,7 +11,11 @@ const theme = createMuiTheme({
         primary: {
             main: "#57BC90",
         }
-    }
+    },
+    typography: {
+        useNextVariants: true,
+        fontFamily: 'Akaya Telivigala, cursive',
+    },
 });
 
 export default theme;

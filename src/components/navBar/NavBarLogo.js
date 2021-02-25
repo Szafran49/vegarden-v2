@@ -2,8 +2,8 @@ import logo from './vegarden-logo.png'
 import styled from 'styled-components'
 
 const StyledImage = styled.img`
-  width:85px;
-  height:85px;
+  width:auto;
+  height:100%;
 `
 
 const NavBarLogo = () => {

@@ -9,12 +9,15 @@ import SignoutButton from "./buttons/SignoutButton";
 import UserProfileButton from "./buttons/UserProfileButton";
 import Link from "../../shared/StyledLink";
 import { useAuth } from '../../contexts/AuthContexts'
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles(() => ({
   appBar: {
     backgroundColor: "white",
+    height: "10vh",
   },
   logoContainer: {
-    flexGrow: 10,
+    flexGrow: 1,
+    height: "100%",
     marginLeft: "4vw",
   },
   buttons: {
@@ -27,7 +30,7 @@ export default function NavBar() {
   const { currentUser } = useAuth()
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.appBar} p={2}>
+    <AppBar position="static" className={classes.appBar}>
       <Toolbar>
         <div className={classes.logoContainer}>
           <Link to="/">

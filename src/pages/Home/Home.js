@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    height: "calc(100vh - 81px)",
-    maxWidth: "90vw ",
+    height: "90vh",
+    maxWidth: "90vw",
 
   }
 }));
