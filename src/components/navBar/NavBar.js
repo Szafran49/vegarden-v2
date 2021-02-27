@@ -8,7 +8,7 @@ import SigninButton from "./buttons/SigninButton";
 import SignoutButton from "./buttons/SignoutButton";
 import UserProfileButton from "./buttons/UserProfileButton";
 import Link from "../../shared/StyledLink";
-import { useAuth } from '../../contexts/AuthContexts'
+import { useAuth } from "../../contexts/AuthContexts";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -18,32 +18,31 @@ const useStyles = makeStyles(() => ({
   logoContainer: {
     flexGrow: 1,
     height: "100%",
-    marginLeft: "4vw",
+    marginLeft: "5vw",
+    backgroundColor: "red",
   },
-  buttons: {
+  buttonsContainer: {
+    display: "block",
     marginRight: "calc(4vw + 10px)",
   },
-
 }));
 
 export default function NavBar() {
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
   const classes = useStyles();
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar>
         <div className={classes.logoContainer}>
-          <Link to="/">
-            <Logo />
-          </Link>
+          <Logo />
         </div>
-        <div className={classes.buttons}>
-          {!currentUser &&
+        <div className={classes.buttonsContainer}>
+          {!currentUser && (
             <>
               <SigninButton />
               <SignupButton />
             </>
-          }
+          )}
           <UserProfileButton />
           <SignoutButton />
         </div>

@@ -6,10 +6,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import StyledCloseButton from '../../../shared/StyledModalCloseButton'
-import CloseIcon from '@material-ui/icons/CloseSharp'
-import FormControl from '@material-ui/core/FormControl'
-import { useAuth } from '../../../contexts/AuthContexts'
+import StyledCloseButton from "../../../shared/StyledModalCloseButton";
+import CloseIcon from "@material-ui/icons/CloseSharp";
+import FormControl from "@material-ui/core/FormControl";
+import { useAuth } from "../../../contexts/AuthContexts";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,24 +22,24 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 1),
   },
   signinButton: {
     marginRight: theme.spacing(1),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "white",
-      boxShadow: `5px -5px ${theme.primary.darkGreen}`
-    }
-  }
+      boxShadow: `5px -5px ${theme.primary.darkGreen}`,
+    },
+  },
 }));
 
 export default function SignInButton() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const { signIn } = useAuth();
-  const [error, setError] = useState()
+  const [error, setError] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -50,20 +50,19 @@ export default function SignInButton() {
   };
 
   function handleEmailChange(value) {
-    setEmail(value)
+    setEmail(value);
   }
 
   function handlePasswordChange(value) {
-    setPassword(value)
+    setPassword(value);
   }
 
   function handleSignIn() {
     try {
-      setError("")
-      signIn(email, password)
-    }
-    catch {
-      setError("Nie udało się stworzyć konta")
+      setError("");
+      signIn(email, password);
+    } catch {
+      setError("Nie udało się stworzyć konta");
     }
   }
 
@@ -121,11 +120,14 @@ export default function SignInButton() {
   );
   return (
     <>
-      <Button onClick={handleOpen} variant="outlined" className={classes.signinButton}>
+      <Button
+        onClick={handleOpen}
+        variant="outlined"
+        className={classes.signinButton}
+      >
         Zaloguj się
       </Button>
       {body}
     </>
   );
 }
-

@@ -1,13 +1,13 @@
-import logo from './vegarden-logo.png'
-import styled from 'styled-components'
-
-const StyledImage = styled.img`
-  width:auto;
-  height:100%;
-`
+import logo from "./vegarden-logo.png";
+import { Typography } from "@material-ui/core";
+import Link from "../../shared/StyledLink";
 
 const NavBarLogo = () => {
-  return <StyledImage src={logo} alt="logo" />;
+  return (
+    <Link to="/">
+      <Typography variant="h5">Vegarden</Typography>
+    </Link>
+  );
 };
 
 export default NavBarLogo;
