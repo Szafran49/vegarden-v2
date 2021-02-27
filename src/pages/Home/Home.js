@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    height: "90vh",
+    height: "92vh",
     maxWidth: "90vw",
   },
 }));

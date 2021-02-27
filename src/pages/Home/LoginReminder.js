@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 500,
+    width: 550,
     height: 170,
     top: -200,
     bottom: 0,

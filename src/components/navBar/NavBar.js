@@ -7,46 +7,49 @@ import SignupButton from "./buttons/SignupButton";
 import SigninButton from "./buttons/SigninButton";
 import SignoutButton from "./buttons/SignoutButton";
 import UserProfileButton from "./buttons/UserProfileButton";
-import Link from "../../shared/StyledLink";
 import { useAuth } from "../../contexts/AuthContexts";
 
 const useStyles = makeStyles(() => ({
   appBar: {
     backgroundColor: "white",
-    height: "10vh",
+    height: "8vh",
   },
-  logoContainer: {
+  logo: {
     flexGrow: 1,
     height: "100%",
     marginLeft: "5vw",
-    backgroundColor: "red",
   },
   buttonsContainer: {
-    display: "block",
+    position: "relative",
+    right: 0,
+    margin: "auto",
     marginRight: "calc(4vw + 10px)",
   },
+  root: {
+    flexGrow: 1,
+  }
 }));
 
 export default function NavBar() {
   const { currentUser } = useAuth();
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.appBar}>
-      <Toolbar>
-        <div className={classes.logoContainer}>
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
           <Logo />
-        </div>
-        <div className={classes.buttonsContainer}>
-          {!currentUser && (
-            <>
-              <SigninButton />
-              <SignupButton />
-            </>
-          )}
-          <UserProfileButton />
-          <SignoutButton />
-        </div>
-      </Toolbar>
-    </AppBar>
+          <div className={classes.buttonsContainer}>
+            {!currentUser && (
+              <>
+                <SigninButton />
+                <SignupButton />
+              </>
+            )}
+            <UserProfileButton />
+            <SignoutButton />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
