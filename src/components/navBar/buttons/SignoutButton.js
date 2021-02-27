@@ -1,10 +1,11 @@
-import Button from "@material-ui/core/Button";
+import Button from "./NavBarButton";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../contexts/AuthContexts";
 
 export default function LogoutButton() {
   const { currentUser, signOut } = useAuth();
   const navigate = useNavigate();
+
   function handleLogout() {
     try {
       signOut();
@@ -15,11 +16,7 @@ export default function LogoutButton() {
   }
   return (
     <>
-      {currentUser && (
-        <Button type="submit" variant="outlined" onClick={() => handleLogout()}>
-          Wyloguj
-        </Button>
-      )}
+      {currentUser && <Button onClick={() => handleLogout()}>Wyloguj</Button>}
     </>
   );
 }

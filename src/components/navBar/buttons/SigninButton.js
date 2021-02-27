@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
+import NavBarButton from "./NavBarButton";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -23,13 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 1),
-  },
-  signinButton: {
-    marginRight: theme.spacing(1),
-    "&:hover": {
-      backgroundColor: "white",
-      boxShadow: `5px -5px ${theme.primary.darkGreen}`,
-    },
   },
 }));
 
@@ -108,7 +102,6 @@ export default function SignInButton() {
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.submit}
               onClick={() => handleSignIn()}
             >
               Zaloguj się
@@ -120,13 +113,7 @@ export default function SignInButton() {
   );
   return (
     <>
-      <Button
-        onClick={handleOpen}
-        variant="outlined"
-        className={classes.signinButton}
-      >
-        Zaloguj się
-      </Button>
+      <NavBarButton onClick={handleOpen}>Zaloguj się</NavBarButton>
       {body}
     </>
   );

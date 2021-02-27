@@ -47,7 +47,7 @@ const Home = () => {
     if (!currentUser) {
       setOpenModalWindow(true);
     } else {
-      navigate("/flower-beds/overview");
+      navigate("/garden/create");
     }
   };
 
