@@ -1,30 +1,25 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from '@material-ui/core/TextField'
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import ReturnButton from '../../shared/ReturnButton'
 import FormControl from '@material-ui/core/FormControl'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
-import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
-import styled from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles'
+const useStyles = makeStyles((theme) => ({
+  title: {
+    padding: theme.spacing(1)
+  },
+  radioGroup: {
+    marginTop: "20px",
+  }
+}));
 
-const StyledRadioGroup = styled(RadioGroup)`
-  margin-top:20px;
-`
+export default function Form({ width, length, setWidth, setLength, insolationValue, setInsolationValue, widthError, setWidthError, lengthError, setLengthError }) {
 
-export default function FlowerBedForm() {
-  const navigation = useNavigate();
-  const [radioValue, setRadioValue] = useState('large');
-  const [width, setWidth] = useState(null);
-  const [length, setLength] = useState(null);
-  const [widthError, setWidthError] = useState(null);
-  const [lengthError, setLengthError] = useState(null);
-
+  const classes = useStyles()
   function filterInput(e) {
     return e.replace(/\D+/g, '');
   }
@@ -51,28 +46,14 @@ export default function FlowerBedForm() {
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (width && length) {
-      navigation('../select-vegetables')
-    }
-    if (!width) {
-      setWidthError(true);
-    }
-    if (!length) {
-      setLengthError(true);
-    }
-  }
-
   const squareMeters = (width * length) / 10000;
 
   return (
     <>
-      <ReturnButton to="/flower-beds/overview" />
-      <Container component="main" maxWidth="xs">
+      <Container maxWidth="sm">
         <CssBaseline />
-        <Typography variant="h4" align="center">
-          Podaj parametry grządki
+        <Typography variant="h4" align="center" className={classes.title}>
+          Podaj wymiary zagonu
         </Typography>
         <Typography align="center">
           Powierzchnia - {squareMeters} m<sup>2</sup>
@@ -104,25 +85,17 @@ export default function FlowerBedForm() {
           <Typography variant="h5" align="center">
             Nasłonecznienie
           </Typography>
-          <StyledRadioGroup
+          <RadioGroup
+            className={classes.radioGroup}
             aria-label="insolation"
             name="insolation"
-            value={radioValue}
-            onChange={(e) => setRadioValue(e.target.value)}
+            value={insolationValue}
+            onChange={(e) => setInsolationValue(e.target.value)}
           >
             <FormControlLabel value="large" control={<Radio />} label="Duże" />
-            <FormControlLabel value="medium" control={<Radio />} label="Średnie" />
             <FormControlLabel value="small" control={<Radio />} label="Małe" />
-          </StyledRadioGroup>
+          </RadioGroup>
         </FormControl>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Kontynuuj
-              </Button>
       </Container>
     </>
   );

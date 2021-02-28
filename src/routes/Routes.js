@@ -1,9 +1,9 @@
 import Home from "../pages/Home";
 import UserProfile from "../pages/UserProfile";
 import FlowerBeds from "../pages/FlowerBeds";
-import FlowerBedForm from "../pages/FlowerBedForm";
-import Vegetables from "../pages/SelectVegetables";
+import CreateGarden from '../pages/CreateGarden'
 import { Routes, Route } from "react-router-dom";
+import NotFound from './NotFound'
 
 export default function Routing() {
   return (
@@ -12,11 +12,9 @@ export default function Routing() {
       <Route path="/profile/:slug" element={<UserProfile />} />
       <Route path="/garden">
         <Route path="/overview" element={<FlowerBeds />} />
-        <Route path="/create">
-          <Route path="/form" element={<FlowerBedForm />} />
-          <Route path="/select-vegetables" element={<Vegetables />} />
-        </Route>
+        <Route path="/create" element={<CreateGarden />} />
       </Route>
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 }

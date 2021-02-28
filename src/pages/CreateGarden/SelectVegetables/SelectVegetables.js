@@ -8,15 +8,9 @@ import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
 import RecommendedVegetables from './RecommendedVegetables'
 import Typography from '@material-ui/core/Typography'
-import { firestore } from "../../data/firebase";
-import styled from 'styled-components'
+import { firestore } from "../../../data/firebase";
 
-const StyledContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    overflow: hidden;
-`
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   gridList: {
     width: 1000,
     height: 600,
@@ -24,28 +18,20 @@ const useStyles = makeStyles(() => ({
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
   },
+  container: {
+    display: "flex",
+    justifyContent: "space-around",
+    overflow: "hidden",
+  },
+  title: {
+    padding: theme.spacing(1)
+  }
 }));
 
-export default function VegetableSelector() {
+export default function SelectVegetables({ items, setItems }) {
   const classes = useStyles();
-  const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [recommendedItems, setRecommendedItems] = useState([]);
-
-  useEffect(
-    function loadData() {
-      const fetchData = async () => {
-        const vegetables = await firestore.collection("Vegetables").get();
-        const tmp = [];
-        vegetables.docs.map(async (doc) => {
-          tmp.push({ id: doc.id, ...doc.data() });
-        });
-        tmp.sort((a, b) => a.name > b.name ? 1 : -1)
-        setItems(tmp);
-      };
-      fetchData();
-    }, []);
-
 
   useEffect(
     function updateRecommendation() {
@@ -82,10 +68,10 @@ export default function VegetableSelector() {
 
   return (
     <>
-      <Typography variant="h4" align="center">
+      <Typography variant="h4" align="center" className={classes.title}>
         Wybierz warzywa do zasadzenia
         </Typography>
-      <StyledContainer>
+      <div className={classes.container}>
         <GridList className={classes.gridList} cellHeight={400}>
           {items.map((item) => (
             <GridListTile key={item.image} cols={0.4} rows={0.5}>
@@ -111,7 +97,7 @@ export default function VegetableSelector() {
           />
         )}
         <RecommendedVegetables recommendedItems={recommendedItems} addItem={handleClick} />
-      </StyledContainer>
+      </div>
     </>
   );
 }

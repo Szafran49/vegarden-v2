@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
-    padding: theme.spacing(3),
+    padding: theme.spacing(4),
     textAlign: "center",
   },
   button: {
@@ -41,7 +41,7 @@ export default function LoginReminder({ isOpen, setOpen }) {
   }
 
   function handleClick() {
-    navigate("/flower-beds/overview");
+    navigate("/garden/create");
   }
 
   return (

@@ -9,30 +9,38 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles'
 
-const StyledTitle = styled(Typography)`
-`
+const useStyles = makeStyles((theme) => ({
+  list: {
+    maxHeight: '67vh',
+    overflowY: 'auto'
+  },
+  header: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(16),
+    border: '1px solid #dadde9',
 
-const StyledList = styled(List)`
-  height:550px;
-  border: 1px solid red;
-  overflow-y:auto;
-`
+  },
+}));
+
 
 export default function SelectedVegetables({
   selectedItems,
   deleteSelectedItem,
 }) {
+  const classes = useStyles()
 
   function handleClick(id) {
-    console.log(id);
     deleteSelectedItem(id);
   }
 
   return (
     <Grid item xs={2} md={2}>
-      <StyledTitle variant="h7" align="center">Wybrane warzywa</StyledTitle>
-      <StyledList>
+      <Typography align="center" className={classes.header}>Wybrane warzywa</Typography>
+      <List className={classes.list}>
         {selectedItems.map((item) => {
           return (
             <ListItem key={item.id}>
@@ -47,7 +55,7 @@ export default function SelectedVegetables({
               </ListItemSecondaryAction>
             </ListItem>)
         })}
-      </StyledList>
+      </List>
     </Grid>
   );
 }

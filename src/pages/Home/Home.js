@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import backgroundImage from "./background.jpg";
 import { Container } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   startButton: {
     position: "absolute",
     top: 0,
