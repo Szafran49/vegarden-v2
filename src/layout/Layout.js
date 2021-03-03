@@ -1,5 +1,5 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
-import NavBar from '../components/navBar/NavBar'
+import NavBar from './navBar/NavBar'
 
 const Layout = ({ children }) => {
   return (
@@ -11,4 +11,4 @@ const Layout = ({ children }) => {
   )
 };
 
-export default Layout;
+export default Layout; 

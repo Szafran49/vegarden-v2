@@ -8,7 +8,6 @@ import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
 import RecommendedVegetables from './RecommendedVegetables'
 import Typography from '@material-ui/core/Typography'
-import { firestore } from "../../../data/firebase";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -21,10 +20,22 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-around",
-    overflow: "hidden",
   },
-  title: {
+  header: {
     padding: theme.spacing(1)
+  },
+  barTitle: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    width: "",
+    transform: "translateX(0)",
+    transition: "1s",
+    "&:hover": {
+      transform: "translateX(calc(100px - 100%))",
+      overflow: 'visible',
+    }
+  },
+  tile: {
   }
 }));
 
@@ -68,15 +79,18 @@ export default function SelectVegetables({ items, setItems }) {
 
   return (
     <>
-      <Typography variant="h4" align="center" className={classes.title}>
+      <Typography variant="h4" align="center" className={classes.header}>
         Wybierz warzywa do zasadzenia
         </Typography>
       <div className={classes.container}>
         <GridList className={classes.gridList} cellHeight={400}>
           {items.map((item) => (
-            <GridListTile key={item.image} cols={0.4} rows={0.5}>
+            <GridListTile key={item.image} cols={0.4} rows={0.5}
+              classes={{ tile: classes.tile }}
+            >
               <img src={item.image} alt={item.id} />
               <GridListTileBar
+                classes={{ title: classes.barTitle }}
                 title={item.name}
                 actionIcon={
                   <IconButton

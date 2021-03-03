@@ -41,7 +41,7 @@ export default function LoginReminder({ isOpen, setOpen }) {
   }
 
   function handleClick() {
-    navigate("/garden/create");
+    navigate("/garden/select-type");
   }
 
   return (

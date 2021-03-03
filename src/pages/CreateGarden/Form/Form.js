@@ -1,5 +1,4 @@
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from '@material-ui/core/TextField'
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -50,12 +49,11 @@ export default function Form({ width, length, setWidth, setLength, insolationVal
 
   return (
     <>
-      <Container maxWidth="sm">
-        <CssBaseline />
+      <Container maxWidth="sm" align="center">
         <Typography variant="h4" align="center" className={classes.title}>
-          Podaj wymiary zagonu
+          Podaj wymiary powierzchni
         </Typography>
-        <Typography align="center">
+        <Typography variant="h5" align="center">
           Powierzchnia - {squareMeters} m<sup>2</sup>
         </Typography>
         <FormControl required fullWidth>

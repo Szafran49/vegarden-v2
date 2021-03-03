@@ -5,18 +5,18 @@ import { Button, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from '../../contexts/AuthContexts'
 import { firestore } from "../../data/firebase";
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(3, 1),
         padding: theme.spacing(1, 3),
     },
-    container: {
-    }
 }));
 
 export default function CreateGarden() {
     const classes = useStyles()
+    const navigate = useNavigate()
     const { currentUser } = useAuth()
     const [currentStep, setCurrentStep] = useState(1)
     const [width, setWidth] = useState(null)
@@ -45,7 +45,7 @@ export default function CreateGarden() {
     var body;
     var buttons;
 
-    function handleClick() {
+    function handleClickNext() {
         if (!width) {
             setWidthError(true);
             return;
@@ -60,6 +60,10 @@ export default function CreateGarden() {
         setCurrentStep(currentStep + 1)
     }
 
+    function handleBackToTypeSelect() {
+        navigate('../../select-type')
+    }
+
     function handleClickBack() {
         setCurrentStep(currentStep - 1)
     }
@@ -71,14 +75,19 @@ export default function CreateGarden() {
             widthError={widthError} setWidthError={setWidthError}
             lengthError={lengthError} setLengthError={setLengthError}
         />
-        buttons = <Button className={classes.button} variant="contained" color="primary" onClick={() => handleClick()}>Kontynuuj</Button>
+        buttons = (
+            <>
+                <Button className={classes.button} variant="outlined" onClick={() => handleBackToTypeSelect()}>Cofnij</Button>
+                <Button className={classes.button} variant="contained" color="primary" onClick={() => handleClickNext()}>Kontynuuj</Button>
+            </>
+        )
     }
     else if (currentStep === 2) {
         body = <SelectVegetables items={items} setItems={setItems} />
         buttons = (
             <>
                 <Button className={classes.button} variant="outlined" onClick={() => handleClickBack()}>Cofnij</Button>
-                <Button className={classes.button} variant="contained" color="primary" onClick={() => handleClick()}>Kontynuuj</Button>
+                <Button className={classes.button} variant="contained" color="primary" onClick={() => handleClickNext()}>Kontynuuj</Button>
             </>)
     }
 
@@ -88,7 +97,6 @@ export default function CreateGarden() {
             <Container className={classes.container} align="center">
                 {buttons}
             </Container>
-
         </>
     )
 }

@@ -39,6 +39,7 @@ const Home = () => {
   const classes = useStyles();
   const [openModalWindow, setOpenModalWindow] = useState(false);
   const navigate = useNavigate();
+
   var modalBody = (
     <LoginReminder isOpen={openModalWindow} setOpen={setOpenModalWindow} />
   );
@@ -47,7 +48,7 @@ const Home = () => {
     if (!currentUser) {
       setOpenModalWindow(true);
     } else {
-      navigate("/garden/create");
+      navigate("/garden/select-type");
     }
   };
 
