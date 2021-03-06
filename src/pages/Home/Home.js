@@ -40,6 +40,8 @@ const Home = () => {
   const [openModalWindow, setOpenModalWindow] = useState(false);
   const navigate = useNavigate();
 
+
+
   var modalBody = (
     <LoginReminder isOpen={openModalWindow} setOpen={setOpenModalWindow} />
   );
@@ -53,6 +55,7 @@ const Home = () => {
   };
 
   return (
+
     <Container fluid className={classes.container}>
       <img className={classes.image} src={backgroundImage} alt="background" />
       <Button

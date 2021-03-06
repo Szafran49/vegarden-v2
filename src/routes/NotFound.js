@@ -1,5 +1,9 @@
+import Container from "@material-ui/core/Container";
+import Typography from '@material-ui/core/Typography'
 export default function NotFound() {
     return (
-        <p>Nie znaleziono podanej strony.</p>
+        <Container maxWidth="md" align="center">
+            <Typography variant="h6">Nie znaleziono podanej strony.</Typography>
+        </Container>
     )
 }

@@ -54,7 +54,7 @@ export default function LoginReminder({ isOpen, setOpen }) {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Typography component="h1" variant="h6">
-            Przed rozpoczęciem projektowania zalecamy rejestrację! Umożliwi to
+            Przed rozpoczęciem zalecamy rejestrację! Umożliwi to
             zapisywanie projektów!
           </Typography>
           <StyledCloseButton onClick={() => handleClose()}>
