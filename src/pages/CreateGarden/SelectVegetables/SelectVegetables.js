@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from "../../../shared/StyledIconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SelectedVegetables from "./SelectedVegetables";
 import RecommendedVegetables from './RecommendedVegetables'
@@ -12,10 +12,7 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles((theme) => ({
   gridList: {
     width: 1000,
-    height: 600,
-  },
-  icon: {
-    color: "rgba(255, 255, 255, 0.54)",
+    height: "72vh",
   },
   container: {
     display: "flex",
@@ -25,28 +22,20 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1)
   },
   barTitle: {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    width: "",
-    transform: "translateX(0)",
-    transition: "1s",
-    "&:hover": {
-      transform: "translateX(calc(100px - 100%))",
-      overflow: 'visible',
-    }
+    overflow: "visible",
+    whiteSpace: "normal",
+    minHeight: "30px",
+    textAlign: "center",
   },
-  tile: {
-  }
 }));
 
-export default function SelectVegetables({ items, setItems }) {
+export default function SelectVegetables({ items, selectedItems, setSelectedItems }) {
   const classes = useStyles();
-  const [selectedItems, setSelectedItems] = useState([]);
   const [recommendedItems, setRecommendedItems] = useState([]);
 
   useEffect(
     function updateRecommendation() {
-      var matchedItems = [];
+      var matchedItems = []
       var allItems = []
       selectedItems.forEach(item => item.likesArray.forEach(it => {
         for (let i = 0; i < items.length; i++) {
@@ -54,10 +43,9 @@ export default function SelectVegetables({ items, setItems }) {
             matchedItems.push(items[i]);
           }
         }
-        ///TODO ITEMS PROPER MAPPING
+        //TODO ITEMS PROPER MAPPING
       }))
       setRecommendedItems([...matchedItems])
-
     }, [selectedItems]);
 
   function findItem(item) {
@@ -94,10 +82,10 @@ export default function SelectVegetables({ items, setItems }) {
                 title={item.name}
                 actionIcon={
                   <IconButton
-                    className={classes.icon}
+                    colorReverse
                     onClick={() => handleClick(item)}
                   >
-                    <AddIcon />
+                    <AddIcon className={classes.addIcon} />
                   </IconButton>
                 }
               />

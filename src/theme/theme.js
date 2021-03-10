@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
-  primary: {
+  colors: {
     green: "#57BC90",
     blue: "#77C9D4",
     darkGreen: "#015249",

@@ -1,6 +1,5 @@
 import RemoveIcon from "@material-ui/icons/Remove";
-import IconButton from "@material-ui/core/IconButton";
-import styled from 'styled-components'
+import IconButton from "../../../shared/StyledIconButton";
 import Grid from '@material-ui/core/Grid'
 import Typography from "@material-ui/core/Typography";
 import List from '@material-ui/core/List';
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(16),
     border: '1px solid #dadde9',
-
   },
 }));
 
@@ -31,7 +29,7 @@ export default function SelectedVegetables({
   selectedItems,
   deleteSelectedItem,
 }) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   function handleClick(id) {
     deleteSelectedItem(id);

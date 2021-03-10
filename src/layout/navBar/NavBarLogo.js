@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "5vw",
   },
   logoText: {
-    color: theme.primary.green,
+    color: theme.colors.green,
   },
   logoContainer: {
     display: "flex",

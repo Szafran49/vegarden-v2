@@ -7,7 +7,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from "../../../shared/StyledIconButton";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from '@material-ui/core/Tooltip'
 
@@ -33,7 +33,7 @@ export default function RecommendedVegetables({ recommendedItems, addItem }) {
     function handleClick(item) {
         addItem(item)
     }
-    const tooltipTitle = <Typography>Rekomendowane warzywa w pewnym stopniu 'lubią się' z wybranymi warzywami.</Typography>
+    const tooltipTitle = <Typography align="center">Rekomendowane warzywa wybierane są na podstawie uprawie współrzędnej warzyw.</Typography>
 
     return (
         <>

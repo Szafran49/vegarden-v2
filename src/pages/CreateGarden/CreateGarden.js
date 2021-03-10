@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        margin: theme.spacing(3, 1),
+        margin: theme.spacing(5, 1),
         padding: theme.spacing(1, 3),
     },
 }));
@@ -25,6 +25,7 @@ export default function CreateGarden() {
     const [lengthError, setLengthError] = useState(null);
     const [insolationValue, setInsolationValue] = useState("large")
     const [items, setItems] = useState([]);
+    const [selectedItems, setSelectedItems] = useState([]);
 
     useEffect(
         function loadData() {
@@ -83,7 +84,7 @@ export default function CreateGarden() {
         )
     }
     else if (currentStep === 2) {
-        body = <SelectVegetables items={items} setItems={setItems} />
+        body = <SelectVegetables items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
         buttons = (
             <>
                 <Button className={classes.button} variant="outlined" onClick={() => handleClickBack()}>Cofnij</Button>

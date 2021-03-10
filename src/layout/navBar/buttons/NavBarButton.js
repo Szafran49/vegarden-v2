@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     "&:hover": {
       backgroundColor: "white",
-      boxShadow: `5px -5px ${theme.primary.darkGreen}`,
+      boxShadow: `5px -5px ${theme.colors.darkGreen}`,
     },
   },
 }));
