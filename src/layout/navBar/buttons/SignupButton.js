@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  signupButton: {
-    marginRight: theme.spacing(1),
-    "&:hover": {
-      boxShadow: `5px -5px ${theme.colors.darkGreen}`,
-    },
-  },
 }));
 
 export default function SignUpButton() {

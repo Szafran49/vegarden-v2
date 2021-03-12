@@ -1,5 +1,5 @@
 import Form from './Form/Form'
-import SelectVegetables from './SelectVegetables/SelectVegetables'
+import SelectVegetables from './NewLayout/SelectVegetables'
 import { useState, useEffect } from 'react'
 import { Button, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -18,7 +18,7 @@ export default function CreateGarden() {
     const classes = useStyles()
     const navigate = useNavigate()
     const { currentUser } = useAuth()
-    const [currentStep, setCurrentStep] = useState(1)
+    const [currentStep, setCurrentStep] = useState(0)
     const [width, setWidth] = useState(null)
     const [length, setLength] = useState(null)
     const [widthError, setWidthError] = useState(null);
@@ -43,8 +43,8 @@ export default function CreateGarden() {
 
 
 
-    var body;
-    var buttons;
+    let body;
+    let buttons;
 
     function handleClickNext() {
         if (!width) {
@@ -69,7 +69,7 @@ export default function CreateGarden() {
         setCurrentStep(currentStep - 1)
     }
 
-    if (currentStep === 1) {
+    if (currentStep === 0) {
         body = <Form width={width} setWidth={setWidth}
             length={length} setLength={setLength}
             insolationValue={insolationValue} setInsolationValue={setInsolationValue}
@@ -83,8 +83,8 @@ export default function CreateGarden() {
             </>
         )
     }
-    else if (currentStep === 2) {
-        body = <SelectVegetables items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+    else if (currentStep === 1) {
+        body = <SelectVegetables items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} width={width} />
         buttons = (
             <>
                 <Button className={classes.button} variant="outlined" onClick={() => handleClickBack()}>Cofnij</Button>
