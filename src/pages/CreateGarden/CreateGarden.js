@@ -1,5 +1,5 @@
 import Form from './Form/Form'
-import SelectVegetables from './NewLayout/SelectVegetables'
+import Field from './NewLayout/Field'
 import { useState, useEffect } from 'react'
 import { Button, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -42,6 +42,9 @@ export default function CreateGarden() {
         }, []);
 
 
+    useEffect(function resetAfterFieldWidthChange() {
+        setSelectedItems([])
+    }, [width])
 
     let body;
     let buttons;
@@ -70,11 +73,17 @@ export default function CreateGarden() {
     }
 
     if (currentStep === 0) {
-        body = <Form width={width} setWidth={setWidth}
-            length={length} setLength={setLength}
-            insolationValue={insolationValue} setInsolationValue={setInsolationValue}
-            widthError={widthError} setWidthError={setWidthError}
-            lengthError={lengthError} setLengthError={setLengthError}
+        body = <Form
+            width={width}
+            setWidth={setWidth}
+            length={length}
+            setLength={setLength}
+            insolationValue={insolationValue}
+            setInsolationValue={setInsolationValue}
+            widthError={widthError}
+            setWidthError={setWidthError}
+            lengthError={lengthError}
+            setLengthError={setLengthError}
         />
         buttons = (
             <>
@@ -84,12 +93,22 @@ export default function CreateGarden() {
         )
     }
     else if (currentStep === 1) {
-        body = <SelectVegetables items={items} selectedItems={selectedItems} setSelectedItems={setSelectedItems} width={width} />
+        body = (
+            <>
+                <Field
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                    fieldWidth={width}
+                    items={items}
+                />
+            </>
+        )
         buttons = (
             <>
                 <Button className={classes.button} variant="outlined" onClick={() => handleClickBack()}>Cofnij</Button>
                 <Button className={classes.button} variant="contained" color="primary" onClick={() => handleClickNext()}>Kontynuuj</Button>
-            </>)
+            </>
+        )
     }
 
     return (

@@ -12,7 +12,6 @@ import { useAuth } from "../../contexts/AuthContexts";
 const useStyles = makeStyles(() => ({
   appBar: {
     backgroundColor: "white",
-
   },
   logo: {
     flexGrow: 1,

@@ -35,8 +35,7 @@ export default function SelectVegetables({ items, selectedItems, setSelectedItem
 
   useEffect(
     function updateRecommendation() {
-      var matchedItems = []
-      var allItems = []
+      let matchedItems = []
       selectedItems.forEach(item => item.likesArray.forEach(it => {
         for (let i = 0; i < items.length; i++) {
           if (it === items[i].id) {

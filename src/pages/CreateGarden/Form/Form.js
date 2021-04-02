@@ -26,6 +26,7 @@ export default function Form({ width, length, setWidth, setLength, insolationVal
   function handleWidthChange(e) {
     if (e.length === 1 && e === '0') {
       e = null
+      return;
     }
     e = filterInput(e);
     setWidth(e);
@@ -37,6 +38,7 @@ export default function Form({ width, length, setWidth, setLength, insolationVal
   function handleLengthChange(e) {
     if (e.length === 1 && e === '0') {
       e = null
+      return;
     }
     e = filterInput(e);
     setLength(e);
