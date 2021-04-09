@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import { useEffect, useState } from "react";
 import DoneIcon from "@material-ui/icons/Done";
+import Recommendation from "./Recommendation";
 
 const useStyles = makeStyles(() => ({
   menu: {
@@ -47,7 +48,7 @@ export default function Column({
   handleVegetableDelete,
   handleVegetableForEditDisplayChange,
   handleVegetableWidthChange,
-  fieldWidth,
+  recommendation,
 }) {
   const [desiredWidth, setDesiredWidth] = useState(width);
   const [editWidthMode, setEditWidthMode] = useState(false);
@@ -73,6 +74,11 @@ export default function Column({
 
   function handleVegetableChange() {
     handleVegetableForEditDisplayChange(index);
+    handleClose();
+  }
+
+  function handleDelete(index) {
+    handleVegetableDelete(index);
     handleClose();
   }
 
@@ -129,6 +135,8 @@ export default function Column({
         >
           Edytuj
         </Button>
+
+        <Recommendation recommendation={recommendation} />
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -142,9 +150,7 @@ export default function Column({
           <MenuItem onClick={() => handleEditWidthClick()}>
             Zmień szerokość
           </MenuItem>
-          <MenuItem onClick={() => handleVegetableDelete(index)}>
-            Usuń warzywo
-          </MenuItem>
+          <MenuItem onClick={() => handleDelete(index)}>Usuń warzywo</MenuItem>
         </Menu>
       </div>
     </>

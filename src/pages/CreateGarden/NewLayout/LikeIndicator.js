@@ -6,16 +6,13 @@ const useStyles = makeStyles(() => ({
     display: "block",
     color: "rgb(68, 242, 29)",
     fontSize: 50,
-    cursor: "pointer",
     zIndex: 123,
     borderRadius: "50%",
-    transform: "rotatex(180deg)",
   },
   leftArrow: {
     display: "block",
     color: "rgb(68, 242, 29)",
     fontSize: 50,
-    cursor: "pointer",
     zIndex: 123,
     borderRadius: "50%",
     transform: "rotate(180deg)",
@@ -37,35 +34,25 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function LikeIndicator({ left, right, recommendation }) {
+export default function LikeIndicator({ left, right }) {
   const classes = useStyles();
   return (
     <div style={{ position: "relative" }}>
       {left ? (
-        <>
-          <Tooltip
-            title={`Obok tego warzywa najlpiej zasadzić: ${recommendation}`}
-            placement="right"
-          >
-            <div className={classes.leftArrowContainer}>
-              <ArrowForwardIcon className={classes.leftArrow} />
-              <ArrowForwardIcon className={classes.leftArrow} />
-              <ArrowForwardIcon className={classes.leftArrow} />
-              <ArrowForwardIcon className={classes.leftArrow} />
-            </div>
-          </Tooltip>
-        </>
+        <div className={classes.leftArrowContainer}>
+          <ArrowForwardIcon className={classes.leftArrow} />
+          <ArrowForwardIcon className={classes.leftArrow} />
+          <ArrowForwardIcon className={classes.leftArrow} />
+          <ArrowForwardIcon className={classes.leftArrow} />
+        </div>
       ) : null}
-
       {right ? (
-        <Tooltip title="TODO" placement="left">
-          <div className={classes.rightArrowContainer}>
-            <ArrowForwardIcon className={classes.rightArrow} />
-            <ArrowForwardIcon className={classes.rightArrow} />
-            <ArrowForwardIcon className={classes.rightArrow} />
-            <ArrowForwardIcon className={classes.rightArrow} />
-          </div>
-        </Tooltip>
+        <div className={classes.rightArrowContainer}>
+          <ArrowForwardIcon className={classes.rightArrow} />
+          <ArrowForwardIcon className={classes.rightArrow} />
+          <ArrowForwardIcon className={classes.rightArrow} />
+          <ArrowForwardIcon className={classes.rightArrow} />
+        </div>
       ) : null}
     </div>
   );

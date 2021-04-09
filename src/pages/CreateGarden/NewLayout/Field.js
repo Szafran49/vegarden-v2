@@ -24,13 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   add: {
-    position: "relative",
-    left: 0,
-    top: 0,
-    bottom: 0,
     color: "black",
-    maxWidth: 40,
-    maxHeight: 40,
+    width: 40,
+    height: 40,
     border: "1px solid black",
   },
 
@@ -49,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "baseline",
     justifyContent: "center",
   },
+
+  addContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    margin: "auto",
+  },
 }));
 
 export default function Field({
@@ -64,7 +73,6 @@ export default function Field({
   );
   const [rowToChange, setRowToChange] = useState(null);
   const [widthAlert, setWidthAlert] = useState(false);
-  const [vegetableRelationships, setVegetableRelationships] = useState([]);
   const classes = useStyles();
 
   useEffect(
@@ -76,38 +84,6 @@ export default function Field({
     },
     [selectedItems, fieldWidth]
   );
-
-  // useEffect(
-  //   function updateVegetableRelationships() {
-  //     const template = {
-  //       left: false,
-  //       right: false,
-  //     };
-  //     let tmp = [];
-  //     for (let i = 0; i < selectedItems.length; i++) {
-  //       tmp.push(template);
-  //     }
-  //     if (selectedItems.length >= 2) {
-  //       const data = selectedItems;
-  //       for (let i = 0; i < selectedItems.length - 1; i++) {
-  //         if (data[i].likesArray.includes(data[i + 1].id)) {
-  //           tmp[i].right = true;
-  //         } else {
-  //           tmp[i].right = false;
-  //         }
-  //       }
-  //       for (let i = selectedItems.length - 1; i > 0; i--) {
-  //         if (data[i].likesArray.includes(data[i - 1].id)) {
-  //           tmp[i].left = true;
-  //         } else {
-  //           tmp[i].left = false;
-  //         }
-  //       }
-  //     }
-  //     setVegetableRelationships(tmp);
-  //   },
-  //   [selectedItems, fieldWidth]
-  // );
 
   function checkLeftSideRelationShip(index) {
     if (index === 0) {
@@ -129,8 +105,18 @@ export default function Field({
     return false;
   }
 
-  console.log(selectedItems);
-  console.log(vegetableRelationships);
+  function translateRecommendation(likesArray) {
+    let tmp = [];
+    likesArray.forEach((itemLike) => {
+      items.forEach((item) => {
+        if (item.id === itemLike) {
+          tmp.push(item.name);
+        }
+      });
+    });
+    return tmp;
+  }
+
   function changeVegetablesDisplay() {
     setIsVegetablesVisible(!isVegetablesVisible);
   }
@@ -160,7 +146,6 @@ export default function Field({
     let data = [...selectedItems];
     item.width = selectedItems[rowToChange].width;
     data[index] = item;
-    console.log(item);
     setSelectedItems(data);
     handleVegetableForEditDisplayChange(null);
   }
@@ -208,6 +193,7 @@ export default function Field({
               index={index}
               width={item.width}
               fieldWidth={fieldWidth}
+              recommendation={translateRecommendation(item.likesArray)}
             />
             <LikeIndicator
               left={checkLeftSideRelationShip(index)}
@@ -224,11 +210,16 @@ export default function Field({
           </ColumnLayout>
         ))}
         {remainingSpace > 0 ? (
-          <div className={classes.remainingSpaceDescription}>
-            <Typography>Pozostałe miejsce</Typography>
-            <div className={classes.remainingSpace}>
-              <Typography variant="h5">{remainingSpace}</Typography>
-              <Typography variant="h7">cm</Typography>
+          <div style={{ position: "relative" }}>
+            <div className={classes.remainingSpaceDescription}>
+              <Typography>Pozostałe miejsce</Typography>
+              <div className={classes.remainingSpace}>
+                <Typography variant="h5">{remainingSpace}</Typography>
+                <Typography variant="h7">cm</Typography>
+              </div>
+            </div>
+            <div className={classes.addContainer}>
+              <Typography>Zasadź warzywo</Typography>
               <IconButton
                 onClick={() => changeVegetablesDisplay()}
                 className={classes.add}
