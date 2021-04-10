@@ -3,9 +3,6 @@ import TextField from '@material-ui/core/TextField'
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import FormControl from '@material-ui/core/FormControl'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Radio from '@material-ui/core/Radio'
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -16,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Form({ width, length, setWidth, setLength, insolationValue, setInsolationValue, widthError, setWidthError, lengthError, setLengthError }) {
+
+export default function Form({ width, length, setWidth, setLength, widthError, setWidthError, lengthError, setLengthError }) {
 
   const classes = useStyles()
   function filterInput(e) {
@@ -82,19 +80,7 @@ export default function Form({ width, length, setWidth, setLength, insolationVal
             value={length}
             onChange={(e) => handleLengthChange(e.target.value)}
           />
-          <Typography variant="h5" align="center">
-            Nasłonecznienie
-          </Typography>
-          <RadioGroup
-            className={classes.radioGroup}
-            aria-label="insolation"
-            name="insolation"
-            value={insolationValue}
-            onChange={(e) => setInsolationValue(e.target.value)}
-          >
-            <FormControlLabel value="large" control={<Radio />} label="Duże" />
-            <FormControlLabel value="small" control={<Radio />} label="Małe" />
-          </RadioGroup>
+
         </FormControl>
       </Container>
     </>

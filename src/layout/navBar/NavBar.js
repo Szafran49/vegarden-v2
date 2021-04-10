@@ -33,14 +33,16 @@ export default function NavBar() {
       <Toolbar>
         <Logo />
         <div className={classes.buttonsContainer}>
-          {!currentUser && (
+          {currentUser === null ?
             <>
               <SigninButton />
               <SignupButton />
+            </> :
+            <>
+              <UserProfileButton />
+              <SignoutButton />
             </>
-          )}
-          <UserProfileButton />
-          <SignoutButton />
+          }
         </div>
       </Toolbar>
     </AppBar>

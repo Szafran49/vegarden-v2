@@ -1,12 +1,12 @@
 import Form from "./Form/Form";
-import Field from "./NewLayout/Field";
+import Field from "./Creator/Field";
+import SubmitProject from './Creator/SubmitProject'
 import { useState, useEffect } from "react";
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContexts";
 import { firestore } from "../../data/firebase";
 import { useNavigate } from "react-router-dom";
-
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(5, 1),
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateGarden() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { saveToTheDatabase, currentUser } = useAuth();
+  const [projectName, setProjectName] = useState()
   const [currentStep, setCurrentStep] = useState(0);
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
   const [widthError, setWidthError] = useState(null);
   const [lengthError, setLengthError] = useState(null);
-  const [insolationValue, setInsolationValue] = useState("large");
   const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -73,6 +73,11 @@ export default function CreateGarden() {
     setCurrentStep(currentStep - 1);
   }
 
+  function handleSaveToTheDatabase() {
+    saveToTheDatabase(projectName, selectedItems)
+  }
+
+
   if (currentStep === 0) {
     body = (
       <Form
@@ -80,8 +85,6 @@ export default function CreateGarden() {
         setWidth={setWidth}
         length={length}
         setLength={setLength}
-        insolationValue={insolationValue}
-        setInsolationValue={setInsolationValue}
         widthError={widthError}
         setWidthError={setWidthError}
         lengthError={lengthError}
@@ -127,17 +130,32 @@ export default function CreateGarden() {
         >
           Cofnij
         </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          onClick={() => handleClickNext()}
-        >
-          Gotowe
-        </Button>
+        {currentUser === null
+          ? <Tooltip title={<Typography style={{ fontSize: 16 }}>Musisz się zalogować, aby zapisywać wykonane projekty!</Typography>}
+            placement="right"
+          >
+            <span>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                disabled
+              >
+                Zapisz
+             </Button>
+            </span>
+          </Tooltip>
+          :
+          <SubmitProject
+            handleSaveToTheDatabase={handleSaveToTheDatabase}
+            setProjectName={setProjectName}
+            projectName={projectName} />
+        }
+
       </>
     );
   }
+
 
   return (
     <>

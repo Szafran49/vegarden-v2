@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
     borderRadius: "50%",
     transform: "rotate(180deg)",
   },
-
   rightArrowContainer: {
     position: "absolute",
     minHeight: "50%",
