@@ -8,11 +8,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "5vw",
   },
   logoText: {
-    color: theme.primary.green,
+    color: theme.colors.green,
   },
   logoContainer: {
     display: "flex",
   },
+  image: {
+    width: "10%",
+
+  }
 }));
 
 const NavBarLogo = () => {
@@ -24,7 +28,7 @@ const NavBarLogo = () => {
           <img
             src={logo}
             alt="logo"
-            style={{ height: "40px", width: "auto" }}
+            className={classes.image}
           />
           <Typography variant="h4" className={classes.logoText}>
             Vegarden

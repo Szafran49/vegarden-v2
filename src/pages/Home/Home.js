@@ -7,18 +7,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import backgroundImage from "./background.jpg";
 import { Container } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   startButton: {
     position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: "auto",
+    top: "50%",
+    bottom: "50%",
+    left: "45%",
     height: "50px",
-    width: "10%",
-    fontSize: "24px",
+    transform: "translateY(-50%)",
+    fontSize: "1.5rem",
     textDecoration: "none",
+    width: 120,
+    [theme.breakpoints.down('xs')]: {
+
+    },
+    [theme.breakpoints.down('sm')]: {
+      left: "40%"
+    },
+
     "&:hover": {
       backgroundColor: "white",
     },
@@ -26,10 +32,13 @@ const useStyles = makeStyles(() => ({
   image: {
     height: "100%",
     width: "100%",
-  },
+    [theme.breakpoints.down('xs')]: {
+      visibility: "hidden",
+    },
 
+  },
   container: {
-    height: "92vh",
+    height: "700px",
     maxWidth: "90vw",
   },
 }));
@@ -39,8 +48,6 @@ const Home = () => {
   const classes = useStyles();
   const [openModalWindow, setOpenModalWindow] = useState(false);
   const navigate = useNavigate();
-
-
 
   var modalBody = (
     <LoginReminder isOpen={openModalWindow} setOpen={setOpenModalWindow} />
