@@ -62,8 +62,7 @@ const Home = () => {
   };
 
   return (
-
-    <Container fluid className={classes.container}>
+    <Container className={classes.container}>
       <img className={classes.image} src={backgroundImage} alt="background" />
       <Button
         variant="contained"

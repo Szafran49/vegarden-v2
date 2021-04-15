@@ -73,10 +73,9 @@ export default function CreateGarden() {
     setCurrentStep(currentStep - 1);
   }
 
-  function handleSaveToTheDatabase() {
-    saveToTheDatabase(projectName, selectedItems)
+  function handleSaveToTheDatabase(projectName) {
+    saveToTheDatabase(selectedItems, projectName, width, length)
   }
-
 
   if (currentStep === 0) {
     body = (
@@ -131,7 +130,8 @@ export default function CreateGarden() {
           Cofnij
         </Button>
         {currentUser === null
-          ? <Tooltip title={<Typography style={{ fontSize: 16 }}>Musisz się zalogować, aby zapisywać wykonane projekty!</Typography>}
+          ? <Tooltip title={<Typography style={{ fontSize: 16 }}>
+            Musisz się zalogować, aby zapisywać wykonane projekty!</Typography>}
             placement="right"
           >
             <span>

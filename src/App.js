@@ -4,7 +4,7 @@ import Routes from './routes/Routes'
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContexts";
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import theme from './theme/Theme'
+import theme from './theme/theme'
 
 export default function App() {
   return (

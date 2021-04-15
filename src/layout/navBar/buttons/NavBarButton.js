@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: theme.spacing(1),
-    width: 130,
+    minWidth: 130,
     maxHeight: "1%",
     overflow: "hidden",
     [theme.breakpoints.down('sm')]: {

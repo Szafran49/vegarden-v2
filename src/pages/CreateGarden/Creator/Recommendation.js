@@ -25,7 +25,6 @@ export default function Recommendation({ recommendation }) {
       </ul>
     );
   });
-  console.log(recommendationList);
 
   return (
     <div className={classes.informationContainer}>

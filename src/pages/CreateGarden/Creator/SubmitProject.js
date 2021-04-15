@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ProjectName({ projectName, setProjectName, handleSaveToTheDatabase }) {
+export default function SubmitProject({ projectName, setProjectName, handleSaveToTheDatabase }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 

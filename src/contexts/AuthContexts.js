@@ -10,7 +10,6 @@ export function useAuth() {
 export default function AuthProvider({ children }) {
 
     const [currentUser, setCurrentUser] = useState()
-
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -30,26 +29,31 @@ export default function AuthProvider({ children }) {
         return auth.signOut()
     }
 
-    async function saveToTheDatabase(projectName, items) {
+    async function saveToTheDatabase(items, projectName, projectWidth, projectLength) {
         const projectType = "Traditional";
-        for (let i = 0; i < items.length; i++) {
-            await firestore.collection('Users').doc(currentUser.email).collection(projectType).doc(projectName).collection('vegetables').doc(items[i].id).set(items[i]);
-        }
+        const data = {}
+        data.vegetables = items;
+        data.projectWidth = projectWidth;
+        data.projectLength = projectLength;
+        await firestore
+            .collection('Users')
+            .doc(currentUser.email)
+            .collection(projectType)
+            .doc(projectName)
+            .set(data)
     }
 
     async function getUserProjects() {
-        const project = await firestore.collection('Users').doc(currentUser.email).collection('Standard').doc('test').get()
+        const project = await firestore
+            .collection('Users')
+            .doc(currentUser.email)
+            .collection('Traditional')
+            .get()
         const tmp = [];
         project.docs.map(async (doc) => {
             tmp.push({ id: doc.id, ...doc.data() });
         });
-        console.log(tmp)
-        if (!project.exists) {
-            console.log('No such document!');
-        } else {
-            console.log('Document data:', project.data());
-        }
-
+        return tmp;
     }
 
     const value = {
@@ -60,8 +64,6 @@ export default function AuthProvider({ children }) {
         saveToTheDatabase,
         getUserProjects
     }
-
-
 
     return (
         <AuthContext.Provider value={value}>

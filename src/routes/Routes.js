@@ -9,7 +9,7 @@ export default function Routing() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/profile/:slug" element={<UserProfile />} />
+      <Route path="/profile" element={<UserProfile />} />
       <Route path="/garden">
         <Route path="/select-type" element={<SelectGardenType />} />
         <Route path="/create" >
