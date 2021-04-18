@@ -29,10 +29,6 @@ export default function EditProject({ project }) {
         setSelectedItems(project.vegetables)
     }, [project])
 
-
-
-    console.log(items)
-    console.log(selectedItems)
     return (
         <>
             {items ?

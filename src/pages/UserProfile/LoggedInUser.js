@@ -1,19 +1,21 @@
-import { Container, GridList, GridListTileBar, Typography, GridListTile } from '@material-ui/core'
+import { Container, Typography, List, ListItem, ListItemText, IconButton } from '@material-ui/core'
 import { useAuth } from '../../contexts/AuthContexts'
 import { makeStyles } from '@material-ui/core/styles'
 import { useEffect, useState } from 'react';
 import EditProject from './EditProject/EditProject'
-
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles((theme) => ({
-
+    listItem: {
+    }
 }));
 
 export default function LoggedInUser() {
     const [projects, setProjects] = useState([])
     const [activeProject, setActiveProject] = useState(null)
     const { currentUser, getUserProjects } = useAuth()
-
-    useEffect(function loadData() {
+    const classes = useStyles()
+    useEffect(function loadProjectsForCurrentUser() {
         const fetchData = async () => {
             const data = await getUserProjects()
             setProjects(data)
@@ -24,36 +26,40 @@ export default function LoggedInUser() {
     }, [currentUser]);
 
     useEffect(function changeProject() {
-
     }, [activeProject])
 
-    function handleClick(project) {
+    function handleProjectChoose(project) {
         setActiveProject(project)
     }
-    console.log(activeProject)
+
+    function handleProjectDelete(project, event) {
+        event.stopPropagation()
+        alert('uwaga! usuwam!')
+    }
 
     return (
         <>
             <Container maxWidth="md" align='center'>
-                <Typography>
+                <Typography variant="h5">
                     Twoje projekty
                 </Typography>
-                <GridList
-                    cellHeight={300}
-                    spacing={50}
-                    cols={5}
-                    rows={5}
-                >
-                    {projects.map((project, index) => (
-                        <GridListTile key={index} >
-                            <GridListTileBar
-                                title={project.id}
-                                onClick={() => handleClick(project)}
+                <List style={{ width: '60%' }}>
+                    {projects.map((project) => (
+                        <ListItem button
+                            onClick={() => handleProjectChoose(project)}
+                            className={classes.listItem}
+                        >
+                            <ListItemText
+                                primary={project.id}
                             />
-                        </GridListTile>))}
-                </GridList>
+                            <DeleteIcon
+                                onClick={(event) => handleProjectDelete(project, event)}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
             </Container>
-            {activeProject !== null
+            { activeProject !== null
                 ? <EditProject project={activeProject} />
                 : null}
         </>

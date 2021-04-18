@@ -1,7 +1,7 @@
 import Button from "./NavBarButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContexts";
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 export default function UserProfileButton() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function UserProfileButton() {
   return (
     <>
       {currentUser && (
-        <Button onClick={() => handleClick()}>Twój profil</Button>
+        <Button onClick={() => handleClick()}><AccountCircleIcon />Profil</Button>
       )}
     </>
   );

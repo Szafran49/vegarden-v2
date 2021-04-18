@@ -1,7 +1,7 @@
 import Button from "./NavBarButton";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../contexts/AuthContexts";
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export default function LogoutButton() {
   const { currentUser, signOut } = useAuth();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function LogoutButton() {
   }
   return (
     <>
-      {currentUser && <Button onClick={() => handleLogout()}>Wyloguj</Button>}
+      {currentUser && <Button onClick={() => handleLogout()}><ExitToAppIcon />Wyloguj</Button>}
     </>
   );
 }
