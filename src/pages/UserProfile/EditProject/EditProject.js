@@ -1,33 +1,42 @@
-import { makeStyles } from '@material-ui/styles'
 import Field from '../../CreateGarden/Creator/Field'
 import { useState, useEffect } from 'react'
-import { firestore } from '../../../data/firebase'
+import { useParams } from 'react-router';
+import { useAuth } from '../../../contexts/AuthContexts';
 
-const useStyles = makeStyles(() => ({
-
-}));
-
-export default function EditProject({ project }) {
-    const [selectedItems, setSelectedItems] = useState(project.vegetables)
+export default function EditProject() {
+    const [selectedItems, setSelectedItems] = useState()
+    const [project, setProject] = useState([])
     const [items, setItems] = useState()
-    const classes = useStyles()
+    const { currentUser, getUserProject, getVegetables } = useAuth()
+    const { projectName } = useParams();
 
-    useEffect(function loadData() {
+    useEffect(function loadVegetables() {
         const fetchData = async () => {
-            const vegetables = await firestore.collection("Vegetables").get();
-            const tmp = [];
-            vegetables.docs.map(async (doc) => {
-                tmp.push({ id: doc.id, ...doc.data() });
-            });
-            tmp.sort((a, b) => (a.name > b.name ? 1 : -1));
-            setItems(tmp);
+            const vegetables = await getVegetables()
+            setItems(vegetables);
         };
-        fetchData();
+        if (currentUser != null) {
+            fetchData();
+        }
     }, []);
 
-    useEffect(function updateVegetables() {
+    useEffect(function loadSelectedItems() {
         setSelectedItems(project.vegetables)
-    }, [project])
+    }, [])
+
+    useEffect(function loadProject() {
+        const fetchData = async () => {
+            const data = await getUserProject(projectName)
+            setProject(data)
+        };
+        if (currentUser != null) {
+            fetchData();
+        }
+    }, []);
+
+
+    console.log(project)
+
 
     return (
         <>

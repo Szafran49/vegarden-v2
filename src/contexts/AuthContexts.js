@@ -56,13 +56,38 @@ export default function AuthProvider({ children }) {
         return tmp;
     }
 
+    async function getUserProject(projectName) {
+        const project = await firestore
+            .collection('Users')
+            .doc(currentUser.email)
+            .collection('Traditional')
+            .doc(projectName)
+            .get()
+        return project;
+    }
+
+    async function getVegetables() {
+        const vegetables = await firestore
+            .collection("Vegetables")
+            .get();
+        const tmp = [];
+        vegetables.docs.map(async (doc) => {
+            tmp.push({ id: doc.id, ...doc.data() });
+        });
+        tmp.sort((a, b) => (a.name > b.name ? 1 : -1));
+        return tmp;
+    }
+
+
     const value = {
         currentUser,
         signIn,
         signUp,
         signOut,
         saveToTheDatabase,
-        getUserProjects
+        getUserProjects,
+        getUserProject,
+        getVegetables,
     }
 
     return (

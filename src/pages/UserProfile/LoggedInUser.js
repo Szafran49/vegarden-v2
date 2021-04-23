@@ -1,10 +1,10 @@
-import { Container, Typography, List, ListItem, ListItemText, IconButton } from '@material-ui/core'
+import { Container, Typography, List, ListItem, ListItemText } from '@material-ui/core'
 import { useAuth } from '../../contexts/AuthContexts'
 import { makeStyles } from '@material-ui/core/styles'
 import { useEffect, useState } from 'react';
-import EditProject from './EditProject/EditProject'
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useNavigate } from 'react-router';
+
 const useStyles = makeStyles((theme) => ({
     listItem: {
     }
@@ -12,9 +12,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoggedInUser() {
     const [projects, setProjects] = useState([])
-    const [activeProject, setActiveProject] = useState(null)
     const { currentUser, getUserProjects } = useAuth()
     const classes = useStyles()
+    const navigate = useNavigate()
+
     useEffect(function loadProjectsForCurrentUser() {
         const fetchData = async () => {
             const data = await getUserProjects()
@@ -25,11 +26,9 @@ export default function LoggedInUser() {
         }
     }, [currentUser]);
 
-    useEffect(function changeProject() {
-    }, [activeProject])
 
     function handleProjectChoose(project) {
-        setActiveProject(project)
+        navigate(`project/${project.id}`)
     }
 
     function handleProjectDelete(project, event) {
@@ -43,9 +42,11 @@ export default function LoggedInUser() {
                 <Typography variant="h5">
                     Twoje projekty
                 </Typography>
-                <List style={{ width: '60%' }}>
+                <List
+                    style={{ width: '60%' }}>
                     {projects.map((project) => (
-                        <ListItem button
+                        <ListItem
+                            button
                             onClick={() => handleProjectChoose(project)}
                             className={classes.listItem}
                         >
@@ -59,9 +60,6 @@ export default function LoggedInUser() {
                     ))}
                 </List>
             </Container>
-            { activeProject !== null
-                ? <EditProject project={activeProject} />
-                : null}
         </>
     )
 }
