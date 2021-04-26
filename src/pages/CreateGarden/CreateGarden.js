@@ -1,6 +1,6 @@
 import Form from "./Form/Form";
 import Field from "./Creator/Field";
-import SubmitProject from './Creator/SubmitProject'
+import SubmitProject from "./Creator/SubmitProject";
 import { useState, useEffect } from "react";
 import { Button, Container, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateGarden() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { saveToTheDatabase, currentUser } = useAuth();
-  const [projectName, setProjectName] = useState()
+  const { saveUserProject, currentUser } = useAuth();
+  const [projectName, setProjectName] = useState();
   const [currentStep, setCurrentStep] = useState(0);
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
@@ -74,7 +74,7 @@ export default function CreateGarden() {
   }
 
   function handleSaveToTheDatabase(projectName) {
-    saveToTheDatabase(selectedItems, projectName, width, length)
+    saveUserProject(selectedItems, projectName, width, length);
   }
 
   if (currentStep === 0) {
@@ -129,9 +129,13 @@ export default function CreateGarden() {
         >
           Cofnij
         </Button>
-        {currentUser === null
-          ? <Tooltip title={<Typography style={{ fontSize: 16 }}>
-            Musisz się zalogować, aby zapisywać wykonane projekty!</Typography>}
+        {currentUser === null ? (
+          <Tooltip
+            title={
+              <Typography style={{ fontSize: 16 }}>
+                Musisz się zalogować, aby zapisywać wykonane projekty!
+              </Typography>
+            }
             placement="right"
           >
             <span>
@@ -142,20 +146,19 @@ export default function CreateGarden() {
                 disabled
               >
                 Zapisz
-             </Button>
+              </Button>
             </span>
           </Tooltip>
-          :
+        ) : (
           <SubmitProject
             handleSaveToTheDatabase={handleSaveToTheDatabase}
             setProjectName={setProjectName}
-            projectName={projectName} />
-        }
-
+            projectName={projectName}
+          />
+        )}
       </>
     );
   }
-
 
   return (
     <>
