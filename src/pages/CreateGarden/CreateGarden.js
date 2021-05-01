@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Button, Container, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContexts";
-import { firestore } from "../../data/firebase";
+import { firestore } from "../../data/Firebase";
 import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   button: {

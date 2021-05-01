@@ -4,33 +4,30 @@ import { makeStyles } from "@material-ui/core/styles";
 import Link from "../../shared/StyledLink";
 
 const useStyles = makeStyles((theme) => ({
-  logo: {
+  logoContainer: {
     marginLeft: "5vw",
   },
-  logoText: {
+  text: {
     color: theme.colors.green,
+    marginTop: 5,
   },
-  logoContainer: {
+  logo: {
     display: "flex",
   },
-  image: {
-    width: "10%",
-
-  }
 }));
 
 const NavBarLogo = () => {
   const classes = useStyles();
   return (
-    <div className={classes.logo}>
-      <Link to="/">
-        <div className={classes.logoContainer}>
+    <div className={classes.logoContainer}>
+      <Link to="/" >
+        <div className={classes.logo}>
           <img
             src={logo}
             alt="logo"
             className={classes.image}
           />
-          <Typography variant="h4" className={classes.logoText}>
+          <Typography variant="h4" className={classes.text}>
             Vegarden
           </Typography>
         </div>

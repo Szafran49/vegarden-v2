@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { auth, firestore } from "../data/firebase";
+import { auth, firestore } from "../data/Firebase";
 
 const AuthContext = React.createContext();
 
@@ -70,7 +70,7 @@ export default function AuthProvider({ children }) {
     return project.data();
   }
 
-  async function updateUserProject() {}
+  async function updateUserProject() { }
 
   async function getVegetables() {
     const vegetables = await firestore.collection("Vegetables").get();

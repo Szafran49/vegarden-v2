@@ -13,12 +13,8 @@ const useStyles = makeStyles(() => ({
   appBar: {
     backgroundColor: "white",
   },
-  logo: {
-    flexGrow: 1,
-    height: "100%",
-    marginLeft: "5vw",
-  },
   buttonsContainer: {
+
     right: 0,
     margin: "auto",
     marginRight: "calc(4vw + 10px)",
