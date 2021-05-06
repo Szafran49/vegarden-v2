@@ -237,7 +237,12 @@ export default function Field({
             <Typography className={classes.text} variant="h5">
                 Szerokość powierzchni - {fieldWidth}cm
       </Typography>
-            {widthAlert ? <Alert /> : null}
+            {widthAlert ?
+                <Alert
+                    title="Podana szerokość przekroczyła maksymalną szerokość podanej powierzchni. 
+                    Wartość została ustawiona na maksymalną."
+                />
+                : null}
         </Container>
     );
 }

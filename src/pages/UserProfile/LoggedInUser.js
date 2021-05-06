@@ -4,17 +4,23 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
-  Tooltip,
 } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContexts";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { useNavigate } from "react-router";
+import DeleteProject from './DeleteProject'
 
-const useStyles = makeStyles((theme) => ({
-  listItem: {},
+const useStyles = makeStyles(() => ({
+  listItem: {
+    boxSizing: "border-box",
+    height: 50,
+    borderBottom: "1px solid black",
+    "&:hover": {
+      cursor: "pointer",
+      borderBottom: "3px solid black",
+    }
+  }
 }));
 
 export default function LoggedInUser() {
@@ -33,16 +39,11 @@ export default function LoggedInUser() {
         fetchData();
       }
     },
-    [currentUser]
+    [currentUser, projects]
   );
 
   function handleProjectChoose(project) {
     navigate(`project/${project.id}`);
-  }
-
-  function handleProjectDelete(project, event) {
-    event.stopPropagation();
-    alert("uwaga! usuwam!");
   }
 
   return (
@@ -52,18 +53,11 @@ export default function LoggedInUser() {
         <List style={{ width: "60%" }}>
           {projects.map((project) => (
             <ListItem
-              button
               onClick={() => handleProjectChoose(project)}
               className={classes.listItem}
             >
               <ListItemText primary={project.id} />
-              <Tooltip title="Usuń">
-                <Button
-                  onClick={(event) => handleProjectDelete(project, event)}
-                >
-                  <DeleteIcon />
-                </Button>
-              </Tooltip>
+              <DeleteProject projectId={project.id} />
             </ListItem>
           ))}
         </List>

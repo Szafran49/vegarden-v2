@@ -48,41 +48,38 @@ export default function Form({ width, length, setWidth, setLength, widthError, s
   const squareMeters = (width * length) / 10000;
 
   return (
-    <>
-      <Container maxWidth="sm" align="center">
-        <Typography variant="h4" align="center" className={classes.title}>
-          Podaj wymiary powierzchni
+    <Container maxWidth="sm" align="center">
+      <Typography variant="h4" align="center" className={classes.title}>
+        Podaj wymiary powierzchni
         </Typography>
-        <Typography variant="h5" align="center">
-          Powierzchnia - {squareMeters} m<sup>2</sup>
-        </Typography>
-        <FormControl required fullWidth>
-          <TextField
-            autoFocus
-            label="Szerokość w cm"
-            id="width"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            error={widthError}
-            helperText={widthError ? "Wypełnij puste pole!" : ""}
-            value={width}
-            onChange={(e) => handleWidthChange(e.target.value)}
-          />
-          <TextField
-            label="Długość w cm"
-            id="length"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            error={lengthError}
-            helperText={lengthError ? "Wypełnij puste pole!" : ""}
-            value={length}
-            onChange={(e) => handleLengthChange(e.target.value)}
-          />
-
-        </FormControl>
-      </Container>
-    </>
+      <Typography variant="h5" align="center">
+        Powierzchnia - {squareMeters} m<sup>2</sup>
+      </Typography>
+      <FormControl required fullWidth>
+        <TextField
+          autoFocus
+          label="Szerokość w cm"
+          id="width"
+          variant="outlined"
+          margin="normal"
+          type="text"
+          error={widthError}
+          helperText={widthError ? "Wypełnij puste pole!" : ""}
+          value={width}
+          onChange={(e) => handleWidthChange(e.target.value)}
+        />
+        <TextField
+          label="Długość w cm"
+          id="length"
+          variant="outlined"
+          margin="normal"
+          type="text"
+          error={lengthError}
+          helperText={lengthError ? "Wypełnij puste pole!" : ""}
+          value={length}
+          onChange={(e) => handleLengthChange(e.target.value)}
+        />
+      </FormControl>
+    </Container>
   );
 }

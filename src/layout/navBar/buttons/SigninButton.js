@@ -10,6 +10,7 @@ import StyledCloseButton from "../../../shared/StyledModalCloseButton";
 import CloseIcon from "@material-ui/icons/CloseSharp";
 import FormControl from "@material-ui/core/FormControl";
 import { useAuth } from "../../../contexts/AuthContexts";
+import LoadingRing from "../../../shared/LoadingRing";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,9 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInButton() {
   const classes = useStyles();
+  const [email, setEmail] = useState('norem0rse@interia.pl');
+  const [password, setPassword] = useState('123456');
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
   const [error, setError] = useState();
 
@@ -51,13 +53,15 @@ export default function SignInButton() {
   }
 
   function handleSignIn() {
+    setIsLoading(true)
     try {
       setError("");
       signIn(email, password);
     } catch {
-      setError("Nie udało się stworzyć konta");
+      setError("Nie udało Ci się zalogować");
     }
   }
+
 
   const body = (
     <Modal
@@ -103,7 +107,7 @@ export default function SignInButton() {
               color="primary"
               onClick={() => handleSignIn()}
             >
-              Zaloguj się
+              {isLoading ? <LoadingRing /> : <span>Zaloguj się</span>}
             </Button>
           </FormControl>
         </div>

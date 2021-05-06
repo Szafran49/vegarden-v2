@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
     textDecoration: "none",
     width: 120,
-    [theme.breakpoints.down('xs')]: {
-
-    },
     [theme.breakpoints.down('sm')]: {
       left: "40%"
     },
@@ -38,8 +35,11 @@ const useStyles = makeStyles((theme) => ({
 
   },
   container: {
-    height: "700px",
+    maxHeight: 725,
     maxWidth: "90vw",
+    [theme.breakpoints.up('sm')]: {
+      height: "91vh",
+    },
   },
 }));
 

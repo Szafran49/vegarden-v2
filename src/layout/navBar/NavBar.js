@@ -9,12 +9,15 @@ import SignoutButton from "./buttons/SignoutButton";
 import UserProfileButton from "./buttons/UserProfileButton";
 import { useAuth } from "../../contexts/AuthContexts";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: "white",
+    minHeight: "9vh",
+    [theme.breakpoints.down('xs')]: {
+      height: 80,
+    },
   },
   buttonsContainer: {
-
     right: 0,
     margin: "auto",
     marginRight: "calc(4vw + 10px)",

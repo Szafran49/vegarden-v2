@@ -39,6 +39,7 @@ export default function AuthProvider({ children }) {
     data.vegetables = items;
     data.projectWidth = projectWidth;
     data.projectLength = projectLength;
+    data.creationDate = Date.now();
     await firestore
       .collection("Users")
       .doc(currentUser.email)
@@ -82,6 +83,14 @@ export default function AuthProvider({ children }) {
     return tmp;
   }
 
+  async function deleteUserProject(projectName) {
+    await firestore.collection("Users")
+      .doc(currentUser.email)
+      .collection("Traditional")
+      .doc(`${projectName}`)
+      .delete();
+  }
+
   const value = {
     currentUser,
     signIn,
@@ -89,6 +98,7 @@ export default function AuthProvider({ children }) {
     signOut,
     saveUserProject,
     updateUserProject,
+    deleteUserProject,
     getUserProjects,
     getUserProject,
     getVegetables,

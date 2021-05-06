@@ -6,6 +6,7 @@ import {
   MenuItem,
   Typography,
 } from "@material-ui/core";
+import Alert from './Alert';
 import { makeStyles } from "@material-ui/styles";
 import { useEffect, useState } from "react";
 import DoneIcon from "@material-ui/icons/Done";
@@ -52,6 +53,7 @@ export default function Column({
 }) {
   const [desiredWidth, setDesiredWidth] = useState(width);
   const [editWidthMode, setEditWidthMode] = useState(false);
+  const [widthAlert, setWidthAlert] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   let inputRef = null;
 
@@ -67,11 +69,15 @@ export default function Column({
     handleClose();
   }
 
-  function handleVegetableWidthSubmit() {
+  function handleVegetableWidthSubmit(index) {
     setEditWidthMode(false);
-    handleVegetableWidthChange(index, desiredWidth);
+    const temp = parseInt(desiredWidth)
+    if (temp > 0)
+      handleVegetableWidthChange(index, desiredWidth);
+    if (temp <= 0)
+      setWidthAlert(true);
+    setWidthAlert(false);
   }
-
   function handleVegetableChange() {
     handleVegetableForEditDisplayChange(index);
     handleClose();
@@ -101,6 +107,11 @@ export default function Column({
           <Input
             value={desiredWidth}
             onChange={(e) => setDesiredWidth(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleVegetableWidthSubmit(index)
+              }
+            }}
             style={{ maxWidth: 40 }}
             inputRef={(button) => {
               inputRef = button;
@@ -109,7 +120,7 @@ export default function Column({
           <Typography variant="h7">cm</Typography>
         </div>
         <IconButton
-          onClick={() => handleVegetableWidthSubmit(index, desiredWidth)}
+          onClick={() => handleVegetableWidthSubmit(index)}
           style={{
             padding: 0,
             marginBottom: 10,
@@ -118,11 +129,12 @@ export default function Column({
         >
           <DoneIcon />
         </IconButton>
+
         <div
           className={classes.widthDescription}
           style={{ display: `${editWidthMode ? "none" : ""}` }}
         >
-          <Typography variant="h5">{width}</Typography>
+          <Typography variant="h5" onClick={() => handleEditWidthClick()}>{width}</Typography>
           <Typography variant="h7">cm</Typography>
         </div>
       </div>
@@ -135,7 +147,6 @@ export default function Column({
         >
           Edytuj
         </Button>
-
         <Recommendation recommendation={recommendation} />
         <Menu
           id="simple-menu"
@@ -152,6 +163,7 @@ export default function Column({
           </MenuItem>
           <MenuItem onClick={() => handleDelete(index)}>Usuń warzywo</MenuItem>
         </Menu>
+        {widthAlert ? <Alert title="Podano niewłaściwą wartość." /> : null}
       </div>
     </>
   );

@@ -2,16 +2,19 @@ import { Tooltip, Typography } from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   informationContainer: {
     position: "relative",
   },
-  information: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    margin: "auto",
+  tooltip: {
+    fontSize: 40,
+  },
+  helpIcon: {
+    background: theme.colors.green,
+    color: 'white',
+    borderRadius: "50%",
+    marginTop: 10,
+    fontSize: 40,
   },
 }));
 
@@ -20,7 +23,7 @@ export default function Recommendation({ recommendation }) {
 
   const recommendationList = recommendation.map((item) => {
     return (
-      <ul style={{ fontSize: 16 }}>
+      <ul style={{ fontSize: 16 }} key={item}>
         <li>{item}</li>
       </ul>
     );
@@ -30,6 +33,7 @@ export default function Recommendation({ recommendation }) {
     <div className={classes.informationContainer}>
       <Tooltip
         arrow
+        className={classes.tooltip}
         title={
           <>
             <Typography>
@@ -38,16 +42,9 @@ export default function Recommendation({ recommendation }) {
             {recommendationList}
           </>
         }
-        style={{ fontSize: 40 }}
       >
         <HelpIcon
-          color="primary"
-          style={{
-            background: "white",
-            borderRadius: "50%",
-            marginTop: 10,
-            fontSize: 40,
-          }}
+          className={classes.helpIcon}
         />
       </Tooltip>
     </div>

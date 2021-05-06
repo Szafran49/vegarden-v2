@@ -23,6 +23,7 @@ export default function EditProject() {
       fetchData();
     }
   }, []);
+
   return (
     <Container maxWidth="md" align="center">
       <Field
