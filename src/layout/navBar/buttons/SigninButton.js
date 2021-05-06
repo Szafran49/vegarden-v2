@@ -29,11 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInButton() {
   const classes = useStyles();
-  const [email, setEmail] = useState('norem0rse@interia.pl');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
+
+
   const [error, setError] = useState();
 
   const handleOpen = () => {
