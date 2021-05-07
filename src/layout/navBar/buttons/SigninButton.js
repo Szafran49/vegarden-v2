@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import NavBarButton from "./NavBarButton";
@@ -11,6 +11,7 @@ import CloseIcon from "@material-ui/icons/CloseSharp";
 import FormControl from "@material-ui/core/FormControl";
 import { useAuth } from "../../../contexts/AuthContexts";
 import LoadingRing from "../../../shared/LoadingRing";
+import Errors from './ModalErrors'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,11 +33,10 @@ export default function SignInButton() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [open, setOpen] = useState(false);
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setPasswordError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
-
-
-  const [error, setError] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -44,6 +44,10 @@ export default function SignInButton() {
 
   const handleClose = () => {
     setOpen(false);
+    setEmail()
+    setPassword()
+    setEmailError();
+    setPasswordError();
   };
 
   function handleEmailChange(value) {
@@ -55,15 +59,36 @@ export default function SignInButton() {
   }
 
   function handleSignIn() {
-    setIsLoading(true)
-    try {
-      setError("");
-      signIn(email, password);
-    } catch {
-      setError("Nie udało Ci się zalogować");
+    setEmailError()
+    setPasswordError()
+    if (!email) {
+      setEmailError(Errors.emptyField)
+      setIsLoading(false)
+      return;
     }
+    if (!password) {
+      setPasswordError(Errors.emptyField)
+      setIsLoading(false)
+      return;
+    }
+    setIsLoading(true)
+    signIn(email, password).catch(function (error) {
+      if (error.code === "auth/wrong-password") {
+        setEmailError(true);
+        setPasswordError(Errors.wrongEmailOrPassword)
+      }
+      if (error.code === "auth/too-many-requests") {
+        setEmailError(true);
+        setPasswordError(Errors.tooManyRequests)
+      }
+      setIsLoading(false)
+    })
   }
 
+  function handleEnterClick(event) {
+    if (event.key === 'Enter')
+      handleSignIn();
+  }
 
   const body = (
     <Modal
@@ -91,6 +116,9 @@ export default function SignInButton() {
               value={email}
               onChange={(e) => handleEmailChange(e.target.value)}
               autoFocus
+              error={emailError}
+              helperText={emailError}
+              onKeyDown={handleEnterClick}
             />
             <TextField
               variant="outlined"
@@ -102,6 +130,9 @@ export default function SignInButton() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => handlePasswordChange(e.target.value)}
+              error={passwordError}
+              helperText={passwordError}
+              onKeyDown={handleEnterClick}
             />
             <Button
               type="submit"

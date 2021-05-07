@@ -39,7 +39,7 @@ export default function LoggedInUser() {
         fetchData();
       }
     },
-    [currentUser, projects]
+    [currentUser, projects, getUserProjects]
   );
 
   function handleProjectChoose(project) {

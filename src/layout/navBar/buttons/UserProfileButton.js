@@ -11,7 +11,9 @@ export default function UserProfileButton() {
   return (
     <>
       {currentUser && (
-        <Button onClick={() => handleClick()}><AccountCircleIcon />Profil</Button>
+        <Button onClick={() => handleClick()}>
+          <AccountCircleIcon />Profil
+        </Button>
       )}
     </>
   );

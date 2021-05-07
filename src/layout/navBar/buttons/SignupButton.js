@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import StyledCloseButton from "../../../shared/StyledModalCloseButton";
 import CloseIcon from "@material-ui/icons/CloseSharp";
 import { useAuth } from "../../../contexts/AuthContexts";
+import Errors from './ModalErrors'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,9 +29,11 @@ export default function SignUpButton() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [passwordConfirm, setPasswordConfirm] = useState();
+  const [repeatedPassword, setRepeatedPassword] = useState();
   const { signUp, currentUser } = useAuth();
-  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setPasswordError] = useState();
+  const [repeatedPasswordError, setRepeatedPasswordError] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,20 +52,37 @@ export default function SignUpButton() {
   }
 
   function handlePasswordConfirmChange(value) {
-    setPasswordConfirm(value);
+    setRepeatedPassword(value);
   }
 
   function handleSignUp() {
-    if (password !== passwordConfirm) {
-      setError("Hasła nie są jednakowe!");
+    setEmailError()
+    setPasswordError()
+    setRepeatedPasswordError()
+    if (!email) {
+      setEmailError(Errors.emptyField)
+      return;
     }
-    console.log(currentUser);
-    try {
-      setError("");
-      signUp(email, password);
-    } catch {
-      setError("Nie udało się stworzyć konta");
+    if (!password) {
+      setPasswordError(Errors.emptyField)
+      return;
     }
+    if (!repeatedPassword) {
+      setRepeatedPasswordError(Errors.emptyField)
+      return;
+    }
+    if (password !== repeatedPassword) {
+      setRepeatedPasswordError(Errors.passwordsAreNotTheSame);
+      return;
+    }
+
+    signUp(email, password).catch(function (error) {
+      if (error.code === "auth/weak-password") {
+        setPasswordError(Errors.weakPassword);
+      }
+      if (error.code === "auth/email-already-in-use")
+        setEmailError(Errors.emailAlreadyInUse);
+    })
   }
 
   const body = (
@@ -93,6 +113,8 @@ export default function SignUpButton() {
               value={email}
               onChange={(e) => handleEmailChange(e.target.value)}
               autoFocus
+              error={emailError}
+              helperText={emailError}
             />
             <TextField
               required
@@ -105,6 +127,8 @@ export default function SignUpButton() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => handlePasswordChange(e.target.value)}
+              error={passwordError}
+              helperText={passwordError}
             />
             <TextField
               required
@@ -115,8 +139,10 @@ export default function SignUpButton() {
               id="password-confirm"
               margin="normal"
               autoComplete="current-password"
-              value={passwordConfirm}
+              value={repeatedPassword}
               onChange={(e) => handlePasswordConfirmChange(e.target.value)}
+              error={repeatedPasswordError}
+              helperText={repeatedPasswordError}
             />
             <Button
               type="submit"
@@ -136,8 +162,6 @@ export default function SignUpButton() {
     <>
       <NavBarButton
         onClick={handleOpen}
-        variant="outlined"
-        className={classes.signupButton}
       >
         Załóż konto
       </NavBarButton>

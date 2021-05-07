@@ -129,7 +129,8 @@ export default function CreateGarden() {
         >
           Cofnij
         </Button>
-        {currentUser === null ? (
+        {currentUser === null ?
+
           <Tooltip
             title={
               <Typography style={{ fontSize: 16 }}>
@@ -138,24 +139,22 @@ export default function CreateGarden() {
             }
             placement="right"
           >
-            <span>
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                disabled
-              >
-                Zapisz
-              </Button>
-            </span>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              disabled
+            >
+              Zapisz
+            </Button>
           </Tooltip>
-        ) : (
+          :
           <SubmitProject
             handleSaveToTheDatabase={handleSaveToTheDatabase}
             setProjectName={setProjectName}
             projectName={projectName}
           />
-        )}
+        }
       </>
     );
   }

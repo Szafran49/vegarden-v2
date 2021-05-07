@@ -39,7 +39,6 @@ export default function AuthProvider({ children }) {
     data.vegetables = items;
     data.projectWidth = projectWidth;
     data.projectLength = projectLength;
-    data.creationDate = Date.now();
     await firestore
       .collection("Users")
       .doc(currentUser.email)
@@ -71,7 +70,18 @@ export default function AuthProvider({ children }) {
     return project.data();
   }
 
-  async function updateUserProject() { }
+  async function updateUserProject(items, projectName) {
+    const projectType = "Traditional";
+    const data = {};
+    data.vegetables = items;
+    await firestore
+      .collection("Users")
+      .doc(currentUser.email)
+      .collection(projectType)
+      .doc(projectName)
+      .set(data);
+
+  }
 
   async function getVegetables() {
     const vegetables = await firestore.collection("Vegetables").get();
