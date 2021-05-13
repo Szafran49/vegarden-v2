@@ -4,7 +4,6 @@ import CreateGarden from '../pages/CreateGarden'
 import SelectGardenType from '../pages/SelectGardenType'
 import { Routes, Route } from "react-router-dom";
 import NotFound from './NotFound'
-import EditProject from "../pages/UserProfile/EditProject/EditProject";
 
 export default function Routing() {
   return (
@@ -12,7 +11,6 @@ export default function Routing() {
       <Route path="/" element={<Home />} />
       <Route path="/profile">
         <Route path="" element={<UserProfile />} />
-        <Route path="/project/:slug" element={<EditProject />} />
       </Route>
       <Route path="/garden">
         <Route path="/select-type" element={<SelectGardenType />} />

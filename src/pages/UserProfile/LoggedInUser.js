@@ -1,15 +1,9 @@
-import {
-  Container,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-} from "@material-ui/core";
+import { Container, Typography, List, ListItem, ListItemText, } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContexts";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import DeleteProject from './DeleteProject'
+import EditProject from "./EditProject";
 
 const useStyles = makeStyles(() => ({
   listItem: {
@@ -25,43 +19,54 @@ const useStyles = makeStyles(() => ({
 
 export default function LoggedInUser() {
   const [projects, setProjects] = useState([]);
-  const { currentUser, getUserProjects } = useAuth();
+  const [isEdited, toggleEdit] = useState(false);
+  const [activeProject, setActiveProject] = useState()
+  const [vegetables, setVegetables] = useState([])
+  const { currentUser, getUserProjects, getVegetables } = useAuth();
   const classes = useStyles();
-  const navigate = useNavigate();
 
   useEffect(
     function loadProjectsForCurrentUser() {
-      const fetchData = async () => {
+      const fetchUserData = async () => {
         const data = await getUserProjects();
         setProjects(data);
       };
-      if (currentUser != null) {
-        fetchData();
+      const fetchVegetables = async () => {
+        const data = await getVegetables();
+        setVegetables(data);
       }
-    },
-    [currentUser, projects, getUserProjects]
-  );
+      if (currentUser != null) {
+        fetchUserData();
+        fetchVegetables();
+      }
+    }, []);
 
   function handleProjectChoose(project) {
-    navigate(`project/${project.id}`);
+    setActiveProject(project)
+    toggleEdit(true);
   }
 
   return (
-    <>
-      <Container maxWidth="md" align="center">
-        <Typography variant="h5">Twoje projekty</Typography>
-        <List style={{ width: "60%" }}>
-          {projects.map((project) => (
-            <ListItem
-              onClick={() => handleProjectChoose(project)}
-              className={classes.listItem}
-            >
-              <ListItemText primary={project.id} />
-              <DeleteProject projectId={project.id} />
-            </ListItem>
-          ))}
-        </List>
-      </Container>
-    </>
+    <Container maxWidth="md" align="center">
+      {isEdited ?
+        <EditProject project={activeProject} vegetables={vegetables} toggleEdit={toggleEdit} />
+        :
+        <>
+          <Typography variant="h5">Twoje projekty</Typography>
+          <List style={{ width: "60%" }}>
+            {projects.map((project) => (
+              <ListItem
+                key={project.id}
+                onClick={() => handleProjectChoose(project)}
+                className={classes.listItem}
+              >
+                <ListItemText primary={project.id} />
+                <DeleteProject projectId={project.id} />
+              </ListItem>
+            ))}
+          </List>
+        </>
+      }
+    </Container>
   );
 }

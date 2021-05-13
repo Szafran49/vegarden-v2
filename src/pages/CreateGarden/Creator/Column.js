@@ -117,7 +117,7 @@ export default function Column({
               inputRef = button;
             }}
           />
-          <Typography variant="h7">cm</Typography>
+          <Typography>cm</Typography>
         </div>
         <IconButton
           onClick={() => handleVegetableWidthSubmit(index)}
@@ -135,7 +135,7 @@ export default function Column({
           style={{ display: `${editWidthMode ? "none" : ""}` }}
         >
           <Typography variant="h5" onClick={() => handleEditWidthClick()}>{width}</Typography>
-          <Typography variant="h7">cm</Typography>
+          <Typography>cm</Typography>
         </div>
       </div>
       <div className={classes.menu}>

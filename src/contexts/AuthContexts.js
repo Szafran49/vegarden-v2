@@ -47,6 +47,18 @@ export default function AuthProvider({ children }) {
       .set(data);
   }
 
+  async function updateUserProject(items, projectName) {
+    const projectType = "Traditional";
+    const data = {};
+    data.vegetables = items;
+    await firestore
+      .collection("Users")
+      .doc(currentUser.email)
+      .collection(projectType)
+      .doc(projectName)
+      .update(data);
+  }
+
   async function getUserProjects() {
     const project = await firestore
       .collection("Users")
@@ -68,19 +80,6 @@ export default function AuthProvider({ children }) {
       .doc(`${projectName}`)
       .get();
     return project.data();
-  }
-
-  async function updateUserProject(items, projectName) {
-    const projectType = "Traditional";
-    const data = {};
-    data.vegetables = items;
-    await firestore
-      .collection("Users")
-      .doc(currentUser.email)
-      .collection(projectType)
-      .doc(projectName)
-      .set(data);
-
   }
 
   async function getVegetables() {
